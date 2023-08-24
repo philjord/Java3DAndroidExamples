@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.62"
+        android:layout_height="0dp"
+        android:id="@+id/java3dSpace"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton android:id="@+id/gouraud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Per-Vertex Lighting (Gouraud)"
+            android:onClick="gouraudButtonActionPerformed"
+            android:checked="true"/>
+        <RadioButton android:id="@+id/phong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Per-Pixel Lighting (Phong)"
+            android:onClick="phongButtonActionPerformed"/>
+
+    </RadioGroup>
+
+
+</LinearLayout>
+
+

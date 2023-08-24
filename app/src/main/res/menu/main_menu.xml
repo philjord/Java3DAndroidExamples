@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      >
+    <item android:id="@+id/menu_test_3d"
+          android:title="menu_test_3d" />
+
+
+
+    <item
+        android:id="@+id/menu_help"
+        android:orderInCategory="991"
+        android:title="menu_help_list">
+        <menu>
+            <item
+                android:id="@+id/menu_help_screen"
+                android:title="menu_help"/>
+            <item
+                android:id="@+id/menu_about"
+                android:title="menu_about"/>
+        </menu>
+    </item>
+</menu>

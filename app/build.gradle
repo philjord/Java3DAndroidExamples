@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'org.jogamp.java3d.examples.java3dhelloworld'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "org.jogamp.java3d.examples.java3dhelloworld"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    //Add these 2 libraries for Java3D
+    implementation ('org.jogamp.java3d:java3d-core-and:1.7.1' )
+    implementation ('org.jogamp.java3d:java3d-utils-and:1.7.1')
+
+    //images and shaders etc
+    implementation files('libs/resources.jar')
+
+}

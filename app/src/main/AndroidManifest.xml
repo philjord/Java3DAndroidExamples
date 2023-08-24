@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Java3dExamples"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        tools:targetApi="31">
+        <activity
+            android:name="org.jogamp.java3d.examples.MainActivity"
+            android:exported="true"
+            android:label="Java3dExamples">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity android:name="org.jogamp.java3d.examples.alternate_appearance.AlternateAppearanceBoundsTest" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.alternate_appearance.AlternateAppearanceScopeTest" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.appearance.AppearanceMixed" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.appearance.AppearanceTest" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.background.BackgroundGeometry" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.background.BackgroundTexture" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.collision.TickTockCollision" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.depth_func.DepthFuncTest" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.distort_glyph.DistortGlyphTest" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.fps_counter.FPSCounterDemo" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.gears.GearBox" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.gears.GearTest" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.gl2es2pipeline.EnvironmentMappingGLSL" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.gl2es2pipeline.ObjLoadGLSL" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.gl2es2pipeline.PhongShadingGLSL" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.gl2es2pipeline.SamplerTestGLSL" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.gl2es2pipeline.ShaderTestGLSL" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.gl2es2pipeline.SphereGLSL" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.gl2es2pipeline.VertexAttrTestGLSL" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.hello_universe.HelloUniverseActivity" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.lightwave.LightWaveViewer" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.lod.LOD" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.objload.ObjLoad" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.platform_geometry.SimpleGeometry" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.pure_immediate.PureImmediate" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.pure_immediate.PureImmediateStereo" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.raster.RasterTest" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.raster.ReadRaster" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.sphere_motion.SphereMotion" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.sphere_motion.SphereMotionGL2ES2_Texture" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.spline_anim.SplineAnim" android:exported="false"/>
+        <activity android:name="org.jogamp.java3d.examples.stencil.StencilOutline" android:exported="false"/>
+
+
+
+
+    </application>
+
+</manifest>

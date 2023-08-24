@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.62"
+        android:layout_height="0dp"
+        android:id="@+id/java3dSpace"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/jLabel1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="WireFrame Depth Function" />
+
+    <Spinner
+        android:id="@+id/normalComboBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:choiceMode="singleChoice" />
+
+    <CheckBox
+        android:id="@+id/wfCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:choiceMode="singleChoice"
+        android:text="WireFrame Write Depth Buffer" />
+
+    <TextView
+        android:id="@+id/jLabel2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Shaded Depth Function" />
+
+    <Spinner
+        android:id="@+id/shadedComboBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:choiceMode="singleChoice" />
+
+    <CheckBox
+        android:id="@+id/shadedCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:choiceMode="singleChoice"
+        android:text="Shaded Write Depth Buffer" />
+
+    <TextView
+        android:id="@+id/jLabel3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Rotating Raster Operation" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rotatingComboBox"
+        android:layout_gravity="center_horizontal"
+        android:choiceMode="singleChoice" />
+
+</LinearLayout>
+
+

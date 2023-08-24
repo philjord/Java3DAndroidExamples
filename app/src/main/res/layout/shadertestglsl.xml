@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.62"
+        android:layout_height="0dp"
+        android:id="@+id/java3dSpace"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton android:id="@+id/zeroButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Density Zero"
+            android:onClick="zeroButtonActionPerformed"
+            android:checked="true"/>
+        <RadioButton android:id="@+id/halfButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Density Half"
+            android:onClick="halfButtonActionPerformed"/>
+        <RadioButton android:id="@+id/fullButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Density Full"
+            android:onClick="fullButtonActionPerformed"/>
+
+    </RadioGroup>
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton android:id="@+id/goldButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Color Gold"
+            android:onClick="goldButtonActionPerformed"
+            android:checked="true"/>
+        <RadioButton android:id="@+id/silverButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Color Silver"
+            android:onClick="silverButtonActionPerformed"/>
+    </RadioGroup>
+    <ToggleButton android:id="@+id/DetachButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textOn="Scene Graph Detach ON"
+        android:textOff="Scene Graph Detach OFF"
+        android:onClick="DetachButtonActionPerformed"/>
+    <ToggleButton android:id="@+id/AttachButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="Scene Graph Create ON"
+        android:textOff="Scene Graph Create OFF"
+        android:onClick="AttachButtonActionPerformed"/>
+    <Button android:id="@+id/replaceSPButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Replace Shader"
+        android:onClick="replaceSPButtonActionPerformed"/>
+
+</LinearLayout>
+
+
