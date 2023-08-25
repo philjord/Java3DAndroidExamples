@@ -66,7 +66,7 @@ import org.jogamp.java3d.SourceCodeShader;
 import org.jogamp.java3d.Transform3D;
 import org.jogamp.java3d.TransformGroup;
 import org.jogamp.java3d.examples.alternate_appearance.AlternateAppearanceBoundsTest;
-import org.jogamp.java3d.examples.java3dhelloworld.R;
+import org.jogamp.java3d.examples.java3dexamples.R;
 import org.jogamp.java3d.utils.geometry.Sphere;
 import org.jogamp.java3d.utils.shader.SimpleShaderAppearance;
 import org.jogamp.java3d.utils.shader.StringIO;
@@ -165,10 +165,6 @@ public class ShaderTestGLSL extends NewtBaseFragmentActivity {
 		{
 			throw new RuntimeException(e);
 		}
-
-
-
-
 
 		Shader[] shaders = new Shader[2];
 		shaders[0] = new SourceCodeShader(Shader.SHADING_LANGUAGE_GLSL, Shader.SHADER_TYPE_VERTEX, vertexProgram);
@@ -330,8 +326,6 @@ public class ShaderTestGLSL extends NewtBaseFragmentActivity {
 
 	private Canvas3D initScene()
 	{
-		//GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
-
 		Canvas3D c = new Canvas3D();
 
 		univ = new SimpleUniverse(c);
@@ -376,7 +370,6 @@ public class ShaderTestGLSL extends NewtBaseFragmentActivity {
 
 		// Create the scene and add the Canvas3D to the drawing panel
 		c = initScene();
-
 
 		// Android Fragments are a pain...
 		NewtBaseFragment nbf = new AlternateAppearanceBoundsTest.NewtBaseFragment2(c.getGLWindow());
@@ -442,7 +435,6 @@ public class ShaderTestGLSL extends NewtBaseFragmentActivity {
 
 	// ----------------------------------------------------------------
 
-
 	private void initComponents()
 	{
 		zeroButton = findViewById(R.id.zeroButton);
@@ -461,7 +453,6 @@ public class ShaderTestGLSL extends NewtBaseFragmentActivity {
 		DetachButton.setSelected(true);
 
 		replaceSPButton.setEnabled(false);
-
 	}
 
 
@@ -578,10 +569,6 @@ public class ShaderTestGLSL extends NewtBaseFragmentActivity {
 
 	}
 
-
-
-
-
 	private ToggleButton AttachButton;
 	private ToggleButton DetachButton;
 	private RadioButton fullButton;
@@ -590,6 +577,5 @@ public class ShaderTestGLSL extends NewtBaseFragmentActivity {
 	private Button replaceSPButton;
 	private RadioButton silverButton;
 	private RadioButton zeroButton;
-
 
 }

@@ -84,14 +84,6 @@ public class DistortGlyphTest extends NewtBaseActivity {
     private SimpleUniverse univ = null;
     private BranchGroup scene = null;
 
-    // get a nice graphics config
-   /* private static GraphicsConfiguration getGraphicsConfig() {
-        GraphicsConfigTemplate3D template = new GraphicsConfigTemplate3D();
-        template.setSceneAntialiasing(GraphicsConfigTemplate3D.PREFERRED);
-        GraphicsConfiguration gcfg = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getBestConfiguration(template);
-        return gcfg;
-    }*/
-    
     private void setupLights(BranchGroup root) {
         // set up the BoundingSphere for all the lights
         BoundingSphere bounds = new BoundingSphere(new Point3d(), 100.0);
@@ -188,20 +180,20 @@ public class DistortGlyphTest extends NewtBaseActivity {
     
     private Canvas3D createUniverse() {
         
-	// Create a Canvas3D using a nice configuration
-	Canvas3D c = new Canvas3D();
+        // Create a Canvas3D using a nice configuration
+        Canvas3D c = new Canvas3D();
 
-	// Create simple universe with view branch
-	univ = new SimpleUniverse(c);
+        // Create simple universe with view branch
+        univ = new SimpleUniverse(c);
 
-	// This will move the ViewPlatform back a bit so the
-	// objects in the scene can be viewed.
-	univ.getViewingPlatform().setNominalViewingTransform();
+        // This will move the ViewPlatform back a bit so the
+        // objects in the scene can be viewed.
+        univ.getViewingPlatform().setNominalViewingTransform();
 
-	// Ensure at least 5 msec per frame (i.e., < 200Hz)
-	univ.getViewer().getView().setMinimumFrameCycleTime(5);
+        // Ensure at least 5 msec per frame (i.e., < 200Hz)
+        univ.getViewer().getView().setMinimumFrameCycleTime(5);
 
-	return c;
+        return c;
     }
 
     // ----------------------------------------------------------------
@@ -216,7 +208,6 @@ public class DistortGlyphTest extends NewtBaseActivity {
         javaawt.imageio.ImageIO.installBufferedImageImpl(VMImageIO.class);
 
         SimpleShaderAppearance.setVersionES300();
-
 
         // Create Canvas3D and SimpleUniverse; add canvas to drawing panel
         c = createUniverse();

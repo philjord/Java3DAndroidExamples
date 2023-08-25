@@ -33,7 +33,7 @@ import org.jogamp.java3d.examples.gl2es2pipeline.ShaderTestGLSL;
 import org.jogamp.java3d.examples.gl2es2pipeline.SphereGLSL;
 import org.jogamp.java3d.examples.gl2es2pipeline.VertexAttrTestGLSL;
 import org.jogamp.java3d.examples.hello_universe.HelloUniverseActivity;
-import org.jogamp.java3d.examples.java3dhelloworld.R;
+import org.jogamp.java3d.examples.java3dexamples.R;
 import org.jogamp.java3d.examples.lightwave.LightWaveViewer;
 import org.jogamp.java3d.examples.lod.LOD;
 import org.jogamp.java3d.examples.objload.ObjLoad;

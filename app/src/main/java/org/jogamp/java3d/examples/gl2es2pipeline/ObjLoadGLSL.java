@@ -32,12 +32,10 @@ package org.jogamp.java3d.examples.gl2es2pipeline;
 import android.os.Bundle;
 import android.widget.Toast;
 
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 
 import org.jogamp.java3d.Alpha;
 import org.jogamp.java3d.AmbientLight;
@@ -70,8 +68,6 @@ import org.jogamp.vecmath.Color3f;
 import org.jogamp.vecmath.Point3d;
 import org.jogamp.vecmath.Vector3f;
 
-import javaawt.image.VMBufferedImage;
-import javaawt.imageio.VMImageIO;
 import jogamp.newt.driver.android.NewtBaseActivity;
 
 /**
@@ -144,22 +140,15 @@ public class ObjLoadGLSL extends NewtBaseActivity {
 			}
 		};
 		Scene s = null;
-		try
-		{
+		try	{
 			s = f.load(filename);
-		}
-		catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			System.err.println(e);
 			System.exit(1);
-		}
-		catch (ParsingErrorException e)
-		{
+		} catch (ParsingErrorException e) {
 			System.err.println(e);
 			System.exit(1);
-		}
-		catch (IncorrectFormatException e)
-		{
+		} catch (IncorrectFormatException e) {
 			System.err.println(e);
 			System.exit(1);
 		}
@@ -269,7 +258,6 @@ public class ObjLoadGLSL extends NewtBaseActivity {
 		System.out.println("     smoothing group info, otherwise 180 within smoothing groups)");
 		System.exit(0);
 	} // End of usage
-
 
 
 	// ----------------------------------------------------------------

@@ -1,6 +1,5 @@
 package org.jogamp.java3d.examples.gl2es2pipeline;
 
-
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -128,10 +127,6 @@ public class SamplerTestGLSL extends NewtBaseActivity {
         }
     }
 
-
-
-
-
     private static String cloudTexName = "/resources/images/bg.jpg";
     private static String earthTexName = "/resources/images/earth.jpg";
 
@@ -221,7 +216,6 @@ public class SamplerTestGLSL extends NewtBaseActivity {
         makeNIO(sph);
         objTrans.addChild(sph);
 
-
         // Create a new Behavior object that will perform the
         // desired operation on the specified transform and add
         // it into the scene graph.
@@ -233,14 +227,9 @@ public class SamplerTestGLSL extends NewtBaseActivity {
         rotator.setSchedulingBounds(bounds);
         objRoot.addChild(rotator);
 
-        // Have Java 3D perform optimizations on this scene graph.
-        //objRoot.compile();
-
         return objRoot;
     }
 
-
-    // End of variables declaration//GEN-END:variables
     public static void makeNIO(Sphere sph) {
         //Make it NIO
         TriangleStripArray geo = (TriangleStripArray) sph.getShape().getGeometry();
@@ -257,7 +246,6 @@ public class SamplerTestGLSL extends NewtBaseActivity {
         geo.getNormals(0, norms);
         newGeo.setNormalRefBuffer(new J3DBuffer(makeFloatBuffer(norms)));
         sph.getShape().setGeometry(newGeo);
-
     }
 
     private static FloatBuffer makeFloatBuffer(float[] arr) {

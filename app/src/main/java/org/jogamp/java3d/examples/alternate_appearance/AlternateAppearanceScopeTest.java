@@ -69,7 +69,7 @@ import org.jogamp.java3d.Material;
 import org.jogamp.java3d.Shape3D;
 import org.jogamp.java3d.Transform3D;
 import org.jogamp.java3d.TransformGroup;
-import org.jogamp.java3d.examples.java3dhelloworld.R;
+import org.jogamp.java3d.examples.java3dexamples.R;
 import org.jogamp.java3d.utils.shader.SimpleShaderAppearance;
 import org.jogamp.java3d.utils.universe.SimpleUniverse;
 import org.jogamp.java3d.utils.universe.ViewingPlatform;
@@ -154,7 +154,6 @@ public class AlternateAppearanceScopeTest extends NewtBaseFragmentActivity {
         altAppScoping.setOnItemSelectedListener(listener);
         altAppScoping.setSelection(2);
 
-
         String enables[] = {"Enabled Set1", "Enabled Set2", "Enabled set1&2", "Disabled set1&2"};
 
         override = findViewById(R.id.override);
@@ -175,7 +174,6 @@ public class AlternateAppearanceScopeTest extends NewtBaseFragmentActivity {
         });
         override.setOnItemSelectedListener(listener);
         override.setSelection(3);
-
 
         String colorVals[] = {"WHITE", "RED", "GREEN", "BLUE"};
 
@@ -198,8 +196,6 @@ public class AlternateAppearanceScopeTest extends NewtBaseFragmentActivity {
         altAppMaterialColor.setOnItemSelectedListener(listener);
         altAppMaterialColor.setSelection(2);
 
-
-
         appMaterialColor = findViewById(R.id.appMaterialColor);
         appMaterialColor.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, colorVals)
         {
@@ -218,8 +214,6 @@ public class AlternateAppearanceScopeTest extends NewtBaseFragmentActivity {
         });
         appMaterialColor.setOnItemSelectedListener(listener);
         appMaterialColor.setSelection(1);
-
-
 
         // Android Fragments are a pain...
         NewtBaseFragment nbf = new AlternateAppearanceBoundsTest.NewtBaseFragment2(c.getGLWindow());
@@ -335,7 +329,6 @@ public class AlternateAppearanceScopeTest extends NewtBaseFragmentActivity {
         ambient.setColor(new Color3f(1.0f, 1.0f, 1.0f));
         ambient.setInfluencingBounds(worldBounds);
         objRoot.addChild(ambient);
-
 
         objRoot.addChild(trans);
 

@@ -89,8 +89,8 @@ public class ObjLoad extends NewtBaseActivity {
     private BranchGroup scene = null;
 
     public BranchGroup createSceneGraph() {
-	// Create the root of the branch graph
-	BranchGroup objRoot = new BranchGroup();
+	    // Create the root of the branch graph
+	    BranchGroup objRoot = new BranchGroup();
 
         // Create a Transformgroup to scale all objects so they
         // appear in the scene.
@@ -100,54 +100,54 @@ public class ObjLoad extends NewtBaseActivity {
         objScale.setTransform(t3d);
         objRoot.addChild(objScale);
 
-	// Create the transform group node and initialize it to the
-	// identity.  Enable the TRANSFORM_WRITE capability so that
-	// our behavior code can modify it at runtime.  Add it to the
-	// root of the subgraph.
-	TransformGroup objTrans = new TransformGroup();
-	objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-	objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-	objScale.addChild(objTrans);
+        // Create the transform group node and initialize it to the
+        // identity.  Enable the TRANSFORM_WRITE capability so that
+        // our behavior code can modify it at runtime.  Add it to the
+        // root of the subgraph.
+        TransformGroup objTrans = new TransformGroup();
+        objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+        objScale.addChild(objTrans);
 
-	int flags = ObjectFile.RESIZE;
-	if (!noTriangulate) flags |= ObjectFile.TRIANGULATE;
-	if (!noStripify) flags |= ObjectFile.STRIPIFY;
-	ObjectFile f = new ObjectFile(flags, 
-	  (float)(creaseAngle * Math.PI / 180.0));
-	Scene s = null;
-	try {
-	  s = f.load(filename);
-	}
-	catch (FileNotFoundException e) {
-	  System.err.println(e);
-	  System.exit(1);
-	}
-	catch (ParsingErrorException e) {
-	  System.err.println(e);
-	  System.exit(1);
-	}
-	catch (IncorrectFormatException e) {
-	  System.err.println(e);
-	  System.exit(1);
-	}
-	  
-	objTrans.addChild(s.getSceneGroup());
+        int flags = ObjectFile.RESIZE;
+        if (!noTriangulate) flags |= ObjectFile.TRIANGULATE;
+        if (!noStripify) flags |= ObjectFile.STRIPIFY;
+        ObjectFile f = new ObjectFile(flags,
+          (float)(creaseAngle * Math.PI / 180.0));
+        Scene s = null;
+        try {
+          s = f.load(filename);
+        }
+        catch (FileNotFoundException e) {
+          System.err.println(e);
+          System.exit(1);
+        }
+        catch (ParsingErrorException e) {
+          System.err.println(e);
+          System.exit(1);
+        }
+        catch (IncorrectFormatException e) {
+          System.err.println(e);
+          System.exit(1);
+        }
 
-	BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0);
+        objTrans.addChild(s.getSceneGroup());
 
-        if (spin) {
-	  Transform3D yAxis = new Transform3D();
-	  Alpha rotationAlpha = new Alpha(-1, Alpha.INCREASING_ENABLE,
-					  0, 0,
-					  4000, 0, 0,
-					  0, 0, 0);
+        BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0);
 
-	  RotationInterpolator rotator =
-	      new RotationInterpolator(rotationAlpha, objTrans, yAxis,
-				       0.0f, (float) Math.PI*2.0f);
-	  rotator.setSchedulingBounds(bounds);
-	  objTrans.addChild(rotator);
-	} 
+            if (spin) {
+          Transform3D yAxis = new Transform3D();
+          Alpha rotationAlpha = new Alpha(-1, Alpha.INCREASING_ENABLE,
+                          0, 0,
+                          4000, 0, 0,
+                          0, 0, 0);
+
+          RotationInterpolator rotator =
+              new RotationInterpolator(rotationAlpha, objTrans, yAxis,
+                           0.0f, (float) Math.PI*2.0f);
+          rotator.setSchedulingBounds(bounds);
+          objTrans.addChild(rotator);
+        }
 
         // Set up the background
         Color3f bgColor = new Color3f(0.05f, 0.05f, 0.5f);
@@ -155,65 +155,61 @@ public class ObjLoad extends NewtBaseActivity {
         bgNode.setApplicationBounds(bounds);
         objRoot.addChild(bgNode);
 
-	return objRoot;
+	    return objRoot;
     }
     
     private Canvas3D createUniverse() {
-	// Get the preferred graphics configuration for the default screen
-	//GraphicsConfiguration config =
-	//    SimpleUniverse.getPreferredConfiguration();
+        // Create a Canvas3D using the preferred configuration
+        Canvas3D canvas3d = new Canvas3D();
 
-	// Create a Canvas3D using the preferred configuration
-	Canvas3D canvas3d = new Canvas3D();
+        // Create simple universe with view branch
+        univ = new SimpleUniverse(canvas3d);
+            BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0);
 
-	// Create simple universe with view branch
-	univ = new SimpleUniverse(canvas3d);
-        BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0);
+        // add mouse behaviors to the ViewingPlatform
+        ViewingPlatform viewingPlatform = univ.getViewingPlatform();
 
-	// add mouse behaviors to the ViewingPlatform
-	ViewingPlatform viewingPlatform = univ.getViewingPlatform();
+        PlatformGeometry pg = new PlatformGeometry();
 
-	PlatformGeometry pg = new PlatformGeometry();
+        // Set up the ambient light
+        Color3f ambientColor = new Color3f(0.1f, 0.1f, 0.1f);
+        AmbientLight ambientLightNode = new AmbientLight(ambientColor);
+        ambientLightNode.setInfluencingBounds(bounds);
+        pg.addChild(ambientLightNode);
 
-	// Set up the ambient light
-	Color3f ambientColor = new Color3f(0.1f, 0.1f, 0.1f);
-	AmbientLight ambientLightNode = new AmbientLight(ambientColor);
-	ambientLightNode.setInfluencingBounds(bounds);
-	pg.addChild(ambientLightNode);
+        // Set up the directional lights
+        Color3f light1Color = new Color3f(1.0f, 1.0f, 0.9f);
+        Vector3f light1Direction  = new Vector3f(1.0f, 1.0f, 1.0f);
+        Color3f light2Color = new Color3f(1.0f, 1.0f, 1.0f);
+        Vector3f light2Direction  = new Vector3f(-1.0f, -1.0f, -1.0f);
 
-	// Set up the directional lights
-	Color3f light1Color = new Color3f(1.0f, 1.0f, 0.9f);
-	Vector3f light1Direction  = new Vector3f(1.0f, 1.0f, 1.0f);
-	Color3f light2Color = new Color3f(1.0f, 1.0f, 1.0f);
-	Vector3f light2Direction  = new Vector3f(-1.0f, -1.0f, -1.0f);
+        DirectionalLight light1
+            = new DirectionalLight(light1Color, light1Direction);
+        light1.setInfluencingBounds(bounds);
+        pg.addChild(light1);
 
-	DirectionalLight light1
-	    = new DirectionalLight(light1Color, light1Direction);
-	light1.setInfluencingBounds(bounds);
-	pg.addChild(light1);
+        DirectionalLight light2
+            = new DirectionalLight(light2Color, light2Direction);
+        light2.setInfluencingBounds(bounds);
+        pg.addChild(light2);
 
-	DirectionalLight light2
-	    = new DirectionalLight(light2Color, light2Direction);
-	light2.setInfluencingBounds(bounds);
-	pg.addChild(light2);
+        viewingPlatform.setPlatformGeometry( pg );
 
-	viewingPlatform.setPlatformGeometry( pg );
-      
-	// This will move the ViewPlatform back a bit so the
-	// objects in the scene can be viewed.
-	viewingPlatform.setNominalViewingTransform();
+        // This will move the ViewPlatform back a bit so the
+        // objects in the scene can be viewed.
+        viewingPlatform.setNominalViewingTransform();
 
-	/*if (!spin) {
-            OrbitBehavior orbit = new OrbitBehavior(canvas3d,
-						    OrbitBehavior.REVERSE_ALL);
-            orbit.setSchedulingBounds(bounds);
-            viewingPlatform.setViewPlatformBehavior(orbit);	    
-	}  */      
-        
+        /*if (!spin) {
+                OrbitBehavior orbit = new OrbitBehavior(canvas3d,
+                                OrbitBehavior.REVERSE_ALL);
+                orbit.setSchedulingBounds(bounds);
+                viewingPlatform.setViewPlatformBehavior(orbit);
+        }  */
+
         // Ensure at least 5 msec per frame (i.e., < 200Hz)
-	univ.getViewer().getView().setMinimumFrameCycleTime(5);
+        univ.getViewer().getView().setMinimumFrameCycleTime(5);
 
-	return canvas3d;
+        return canvas3d;
     }
 
     private void usage() {
@@ -227,7 +223,7 @@ public class ObjLoad extends NewtBaseActivity {
         System.out.println(
                 "     smoothing group info, otherwise 180 within smoothing groups)");
         System.exit(0);
-    } // End of usage
+    }
 
     // ----------------------------------------------------------------
 
@@ -294,11 +290,11 @@ public class ObjLoad extends NewtBaseActivity {
         // Create Canvas3D and SimpleUniverse; add canvas to drawing panel
         c = createUniverse();
 
-	c.getGLWindow().getDelegatedWindow().setSize(700, 700);
+        c.getGLWindow().getDelegatedWindow().setSize(700, 700);
 
-	// Create the content branch and add it to the universe
-	scene = createSceneGraph();
-	univ.addBranchGraph(scene);
+        // Create the content branch and add it to the universe
+        scene = createSceneGraph();
+        univ.addBranchGraph(scene);
         // make the gl window the content of this app
         this.setContentView(this.getWindow(), c.getGLWindow());
     }

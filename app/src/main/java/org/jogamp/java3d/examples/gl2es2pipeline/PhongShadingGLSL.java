@@ -65,7 +65,7 @@ import org.jogamp.java3d.SpotLight;
 import org.jogamp.java3d.Transform3D;
 import org.jogamp.java3d.TransformGroup;
 import org.jogamp.java3d.examples.alternate_appearance.AlternateAppearanceBoundsTest;
-import org.jogamp.java3d.examples.java3dhelloworld.R;
+import org.jogamp.java3d.examples.java3dexamples.R;
 import org.jogamp.java3d.utils.geometry.Sphere;
 import org.jogamp.java3d.utils.shader.SimpleShaderAppearance;
 import org.jogamp.java3d.utils.shader.StringIO;
@@ -312,8 +312,6 @@ public class PhongShadingGLSL extends NewtBaseFragmentActivity {
 
 	private Canvas3D initScene()
 	{
-		//GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
-
 		Canvas3D c = new Canvas3D();
 
 		univ = new SimpleUniverse(c);
@@ -431,7 +429,5 @@ public class PhongShadingGLSL extends NewtBaseFragmentActivity {
 	{
 		sApp.setShaderProgram(gouraudSP);
 	}
-
-
 
 }

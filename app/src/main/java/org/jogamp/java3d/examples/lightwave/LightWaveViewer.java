@@ -71,7 +71,7 @@ import jogamp.newt.driver.android.NewtBaseActivity;
  */
 
 /**
- * PJ doesn't work as teh URL opening code in LwsObject which readed
+ * PJ doesn't work as the URL opening code in LwsObject which reads as
  * URL.getContent()
  *
  * need to be swapped for this possibly
@@ -85,9 +85,6 @@ public class LightWaveViewer extends NewtBaseActivity {
 	private SimpleUniverse univ = null;
 	private BranchGroup scene = null;
 
-
-
-
 	// ----------------------------------------------------------------
 
 	private Canvas3D c = null;
@@ -98,78 +95,69 @@ public class LightWaveViewer extends NewtBaseActivity {
 
 		SimpleShaderAppearance.setVersionES300();
 
-
-
-	if (filename == null) {
-		String lwsfile = "/resources/geometry/ballcone.lws";
-		filename = getClass().getResource(lwsfile);
-		if (filename == null)
-		{
-			System.err.println(lwsfile + " not found");
-			System.exit(1);
+		if (filename == null) {
+			String lwsfile = "/resources/geometry/ballcone.lws";
+			filename = getClass().getResource(lwsfile);
+			if (filename == null)
+			{
+				System.err.println(lwsfile + " not found");
+				System.exit(1);
+			}
 		}
-	}
 
-	// Construct the Lw3d loader and load the file
-	Loader lw3dLoader = new Lw3dLoader(Loader.LOAD_ALL);
-	Scene loaderScene = null;
-	try {
-	    loaderScene = lw3dLoader.load(filename);
-	}
-	catch (Exception e) {
-	    e.printStackTrace();
-            System.exit(1);
-	}
+		// Construct the Lw3d loader and load the file
+		Loader lw3dLoader = new Lw3dLoader(Loader.LOAD_ALL);
+		Scene loaderScene = null;
+		try {
+			loaderScene = lw3dLoader.load(filename);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+				System.exit(1);
+		}
 
+		Canvas3D c = new Canvas3D();
 
-    //    GraphicsConfiguration config =
-    //       SimpleUniverse.getPreferredConfiguration();
-
-        Canvas3D c = new Canvas3D();
-
-
-	// Create a basic universe setup and the root of our scene
+		// Create a basic universe setup and the root of our scene
 		univ = new SimpleUniverse(c);
-	BranchGroup sceneRoot = new BranchGroup();
+		BranchGroup sceneRoot = new BranchGroup();
 
-	// Change the back clip distance; the default is small for
-	// some lw3d worlds
-	View theView = univ.getViewer().getView();
-	theView.setBackClipDistance(50000f);
-	
-	// Now add the scene graph defined in the lw3d file
-	if (loaderScene.getSceneGroup() != null) {
-	    // Instead of using the default view location (which may be
-	    // completely bogus for the particular file you're loading),
-	    // let's use the initial view from the file.  We can get
-	    // this by getting the  view groups from the scene (there's
-	    // only one for Lightwave 3D), then using the inverse of the
-	    // transform on that view as the transform for the entire scene.
+		// Change the back clip distance; the default is small for
+		// some lw3d worlds
+		View theView = univ.getViewer().getView();
+		theView.setBackClipDistance(50000f);
 
-	    // First, get the view groups (shouldn't be null unless there
-	    // was something wrong in the load
-	    TransformGroup viewGroups[] = loaderScene.getViewGroups();
+		// Now add the scene graph defined in the lw3d file
+		if (loaderScene.getSceneGroup() != null) {
+			// Instead of using the default view location (which may be
+			// completely bogus for the particular file you're loading),
+			// let's use the initial view from the file.  We can get
+			// this by getting the  view groups from the scene (there's
+			// only one for Lightwave 3D), then using the inverse of the
+			// transform on that view as the transform for the entire scene.
 
-	    // Get the Transform3D from the view and invert it
-	    Transform3D t = new Transform3D();
-	    viewGroups[0].getTransform(t);
-	    Matrix4d m = new Matrix4d();
-	    t.get(m);
-	    m.invert();
-	    t.set(m);
+			// First, get the view groups (shouldn't be null unless there
+			// was something wrong in the load
+			TransformGroup viewGroups[] = loaderScene.getViewGroups();
 
-	    // Now we've got the transform we want.  Create an
-	    // appropriate TransformGroup and parent the scene to it.
-	    // Then insert the new group into the main BranchGroup.
-	    TransformGroup sceneTransform = new TransformGroup(t);
-	    sceneTransform.addChild(loaderScene.getSceneGroup());
-	    sceneRoot.addChild(sceneTransform);
-	}
-	
-	// Make the scene graph live by inserting the root into the universe
+			// Get the Transform3D from the view and invert it
+			Transform3D t = new Transform3D();
+			viewGroups[0].getTransform(t);
+			Matrix4d m = new Matrix4d();
+			t.get(m);
+			m.invert();
+			t.set(m);
+
+			// Now we've got the transform we want.  Create an
+			// appropriate TransformGroup and parent the scene to it.
+			// Then insert the new group into the main BranchGroup.
+			TransformGroup sceneTransform = new TransformGroup(t);
+			sceneTransform.addChild(loaderScene.getSceneGroup());
+			sceneRoot.addChild(sceneTransform);
+		}
+
+		// Make the scene graph live by inserting the root into the universe
 		univ.addBranchGraph(sceneRoot);
-
-
 
 		// make the gl window the content of this app
 		this.setContentView(this.getWindow(), c.getGLWindow());

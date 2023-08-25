@@ -116,9 +116,6 @@ public class RasterTest extends NewtBaseActivity {
 
 	private Canvas3D createCanvas3DAndUniverse()
 	{
-		// Get the preferred graphics configuration for the default screen
-		//GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
-
 		// Create a Canvas3D using the preferred configuration
 		Canvas3D canvas3D = new Canvas3D(false);
 
@@ -169,8 +166,7 @@ public class RasterTest extends NewtBaseActivity {
 		scene = createSceneGraph();
 
 		// Create an canvas3D3D and SimpleUniverse; add canvas to drawing panel
-		 c = createCanvas3DAndUniverse();
-
+		c = createCanvas3DAndUniverse();
 
 		univ.addBranchGraph(scene);
 		// make the gl window the content of this app

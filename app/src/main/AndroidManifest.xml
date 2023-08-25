@@ -18,9 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
 
         <activity android:name="org.jogamp.java3d.examples.alternate_appearance.AlternateAppearanceBoundsTest" android:exported="false"/>
@@ -55,9 +52,6 @@
         <activity android:name="org.jogamp.java3d.examples.sphere_motion.SphereMotionGL2ES2_Texture" android:exported="false"/>
         <activity android:name="org.jogamp.java3d.examples.spline_anim.SplineAnim" android:exported="false"/>
         <activity android:name="org.jogamp.java3d.examples.stencil.StencilOutline" android:exported="false"/>
-
-
-
 
     </application>
 

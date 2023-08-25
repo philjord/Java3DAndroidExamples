@@ -71,7 +71,7 @@ import org.jogamp.java3d.DirectionalLight;
 import org.jogamp.java3d.Group;
 import org.jogamp.java3d.Material;
 import org.jogamp.java3d.Shape3D;
-import org.jogamp.java3d.examples.java3dhelloworld.R;
+import org.jogamp.java3d.examples.java3dexamples.R;
 import org.jogamp.java3d.utils.shader.SimpleShaderAppearance;
 import org.jogamp.java3d.utils.universe.SimpleUniverse;
 import org.jogamp.vecmath.Color3f;
@@ -82,7 +82,6 @@ import jogamp.newt.driver.android.NewtBaseFragment;
 import jogamp.newt.driver.android.NewtBaseFragmentActivity;
 
 public class AlternateAppearanceBoundsTest extends NewtBaseFragmentActivity {
-
 
     Material mat1, altMat;
     SimpleShaderAppearance app, otherApp;
@@ -174,7 +173,6 @@ public class AlternateAppearanceBoundsTest extends NewtBaseFragmentActivity {
         override.setSelected(false);
         override.setOnCheckedChangeListener(listener2);
 
-
         String colorVals[] = {"WHITE", "RED", "GREEN", "BLUE"};
 
         altAppMaterialColor = findViewById(R.id.altAppMaterialColor);
@@ -196,7 +194,6 @@ public class AlternateAppearanceBoundsTest extends NewtBaseFragmentActivity {
         altAppMaterialColor.setOnItemSelectedListener(listener);
         altAppMaterialColor.setSelection(2);
 
-
         appMaterialColor = findViewById(R.id.appMaterialColor);
         appMaterialColor.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, colorVals)
         {
@@ -215,7 +212,6 @@ public class AlternateAppearanceBoundsTest extends NewtBaseFragmentActivity {
         });
         appMaterialColor.setOnItemSelectedListener(listener);
         appMaterialColor.setSelection(1);
-
 
         // Android Fragments are a pain...
         NewtBaseFragment nbf = new NewtBaseFragment2(c.getGLWindow());
@@ -310,7 +306,6 @@ public class AlternateAppearanceBoundsTest extends NewtBaseFragmentActivity {
         ambient.setInfluencingBounds(worldBounds);
         objRoot.addChild(ambient);
 
-
         // Define a bounding leaf
         leafBounds = new BoundingLeaf(allBounds[currentBounds]);
         leafBounds.setCapability(BoundingLeaf.ALLOW_REGION_WRITE);
@@ -320,7 +315,6 @@ public class AlternateAppearanceBoundsTest extends NewtBaseFragmentActivity {
         } else {
             altApp.setInfluencingBounds(allBounds[currentBounds]);
         }
-
 
         return objRoot;
     }
@@ -338,7 +332,6 @@ public class AlternateAppearanceBoundsTest extends NewtBaseFragmentActivity {
             actionPerformed(buttonView);
         }
     };
-
 
     public void actionPerformed(View parent) {
         Object target = parent;

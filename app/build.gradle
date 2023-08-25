@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'org.jogamp.java3d.examples.java3dhelloworld'
+    namespace 'org.jogamp.java3d.examples.java3dexamples'
     compileSdk 33
 
     defaultConfig {
-        applicationId "org.jogamp.java3d.examples.java3dhelloworld"
+        applicationId "org.jogamp.java3d.examples.java3dexamples"
         minSdk 21
         targetSdk 33
         versionCode 1

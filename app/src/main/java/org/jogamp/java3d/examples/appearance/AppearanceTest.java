@@ -84,200 +84,199 @@ public class AppearanceTest extends NewtBaseActivity {
     private BranchGroup scene = null;
 
     private BranchGroup createSceneGraph() {
-	// Create the root of the branch graph
-	BranchGroup objRoot = new BranchGroup();
+		// Create the root of the branch graph
+		BranchGroup objRoot = new BranchGroup();
 
-	// Create a bounds for the background and lights
-	BoundingSphere bounds =
-	    new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0);
+		// Create a bounds for the background and lights
+		BoundingSphere bounds =
+			new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0);
 
-	// Set up the background
-	TextureLoader bgTexture = new TextureLoader(bgImage);
-	Background bg = new Background(bgTexture.getImage());
-	bg.setApplicationBounds(bounds);
-	objRoot.addChild(bg);
+		// Set up the background
+		TextureLoader bgTexture = new TextureLoader(bgImage);
+		Background bg = new Background(bgTexture.getImage());
+		bg.setApplicationBounds(bounds);
+		objRoot.addChild(bg);
 
-	// Set up the global lights
-	Color3f lColor1 = new Color3f(0.7f, 0.7f, 0.7f);
-	Vector3f lDir1  = new Vector3f(-1.0f, -1.0f, -1.0f);
-	Color3f alColor = new Color3f(0.2f, 0.2f, 0.2f);
+		// Set up the global lights
+		Color3f lColor1 = new Color3f(0.7f, 0.7f, 0.7f);
+		Vector3f lDir1  = new Vector3f(-1.0f, -1.0f, -1.0f);
+		Color3f alColor = new Color3f(0.2f, 0.2f, 0.2f);
 
-	AmbientLight aLgt = new AmbientLight(alColor);
-	aLgt.setInfluencingBounds(bounds);
-	DirectionalLight lgt1 = new DirectionalLight(lColor1, lDir1);
-	lgt1.setInfluencingBounds(bounds);
-	objRoot.addChild(aLgt);
-	objRoot.addChild(lgt1);
+		AmbientLight aLgt = new AmbientLight(alColor);
+		aLgt.setInfluencingBounds(bounds);
+		DirectionalLight lgt1 = new DirectionalLight(lColor1, lDir1);
+		lgt1.setInfluencingBounds(bounds);
+		objRoot.addChild(aLgt);
+		objRoot.addChild(lgt1);
 
-	// Create a bunch of objects with a behavior and add them
-	// into the scene graph.
+		// Create a bunch of objects with a behavior and add them
+		// into the scene graph.
 
-	int row, col;
-	SimpleShaderAppearance[][] app = new SimpleShaderAppearance[3][3];
+		int row, col;
+		SimpleShaderAppearance[][] app = new SimpleShaderAppearance[3][3];
 
-	for (row = 0; row < 3; row++)
-	    for (col = 0; col < 3; col++)
-		app[row][col] = createAppearance(row * 3 + col);
+		for (row = 0; row < 3; row++)
+			for (col = 0; col < 3; col++)
+			app[row][col] = createAppearance(row * 3 + col);
 
-	for (int i = 0; i < 3; i++) {
-	    double ypos = (double)(i - 1) * 0.6;
-	    for (int j = 0; j < 3; j++) {
-		double xpos = (double)(j - 1) * 0.6;
-		objRoot.addChild(createObject(app[i][j], 0.12,  xpos, ypos));
-	    }
-	}
+		for (int i = 0; i < 3; i++) {
+			double ypos = (double)(i - 1) * 0.6;
+			for (int j = 0; j < 3; j++) {
+			double xpos = (double)(j - 1) * 0.6;
+			objRoot.addChild(createObject(app[i][j], 0.12,  xpos, ypos));
+			}
+		}
 
-        // Let Java 3D perform optimizations on this scene graph.
-        objRoot.compile();
+			// Let Java 3D perform optimizations on this scene graph.
+			objRoot.compile();
 
-	return objRoot;
+		return objRoot;
     }
 
     private SimpleShaderAppearance createAppearance(int idx) {
     	SimpleShaderAppearance app = new SimpleShaderAppearance();
 
-	// Globally used colors
-	Color3f black = new Color3f(0.0f, 0.0f, 0.0f);
-	Color3f white = new Color3f(1.0f, 1.0f, 1.0f);
+		// Globally used colors
+		Color3f black = new Color3f(0.0f, 0.0f, 0.0f);
+		Color3f white = new Color3f(1.0f, 1.0f, 1.0f);
 
-	switch (idx) {
-	// Unlit solid
-	case 0:
-	    {
-		// Set up the coloring properties
-		Color3f objColor = new Color3f(1.0f, 0.2f, 0.4f);
-		ColoringAttributes ca = new ColoringAttributes();
-		ca.setColor(objColor);
-		app.setColoringAttributes(ca);
-		break;
-	    }
+		switch (idx) {
+		// Unlit solid
+		case 0:
+			{
+			// Set up the coloring properties
+			Color3f objColor = new Color3f(1.0f, 0.2f, 0.4f);
+			ColoringAttributes ca = new ColoringAttributes();
+			ca.setColor(objColor);
+			app.setColoringAttributes(ca);
+			break;
+			}
 
+		// Unlit wire frame
+		case 1:
+			{
+			// Set up the coloring properties
+			Color3f objColor = new Color3f(0.5f, 0.0f, 0.2f);
+			ColoringAttributes ca = new ColoringAttributes();
+			ca.setColor(objColor);
+			app.setColoringAttributes(ca);
 
-	// Unlit wire frame
-	case 1:
-	    {
-		// Set up the coloring properties
-		Color3f objColor = new Color3f(0.5f, 0.0f, 0.2f);
-		ColoringAttributes ca = new ColoringAttributes();
-		ca.setColor(objColor);
-		app.setColoringAttributes(ca);
+			// Set up the polygon attributes
+			PolygonAttributes pa = new PolygonAttributes();
+			pa.setPolygonMode(pa.POLYGON_LINE);
+			pa.setCullFace(pa.CULL_NONE);
+			app.setPolygonAttributes(pa);
+			break;
+			}
 
-		// Set up the polygon attributes
-		PolygonAttributes pa = new PolygonAttributes();
-		pa.setPolygonMode(pa.POLYGON_LINE);
-		pa.setCullFace(pa.CULL_NONE);
-		app.setPolygonAttributes(pa);
-		break;
-	    }
+		// Unlit points
+		case 2:
+			{
+			// Set up the coloring properties
+			Color3f objColor = new Color3f(0.2f, 0.2f, 1.0f);
+			ColoringAttributes ca = new ColoringAttributes();
+			ca.setColor(objColor);
+			app.setColoringAttributes(ca);
 
-	// Unlit points
-	case 2:
-	    {
-		// Set up the coloring properties
-		Color3f objColor = new Color3f(0.2f, 0.2f, 1.0f);
-		ColoringAttributes ca = new ColoringAttributes();
-		ca.setColor(objColor);
-		app.setColoringAttributes(ca);
+			// Set up the polygon attributes
+			PolygonAttributes pa = new PolygonAttributes();
+			pa.setPolygonMode(pa.POLYGON_POINT);
+			pa.setCullFace(pa.CULL_NONE);
+			app.setPolygonAttributes(pa);
 
-		// Set up the polygon attributes
-		PolygonAttributes pa = new PolygonAttributes();
-		pa.setPolygonMode(pa.POLYGON_POINT);
-		pa.setCullFace(pa.CULL_NONE);
-		app.setPolygonAttributes(pa);
+			// Set up point attributes
+			PointAttributes pta = new PointAttributes();
+			pta.setPointSize(5.0f);
+			app.setPointAttributes(pta);
+			break;
+			}
 
-		// Set up point attributes
-		PointAttributes pta = new PointAttributes();
-		pta.setPointSize(5.0f);
-		app.setPointAttributes(pta);
-		break;
-	    }
+		// Lit solid
+		case 3:
+			{
+			// Set up the material properties
+			Color3f objColor = new Color3f(0.8f, 0.0f, 0.0f);
+			app.setMaterial(new Material(objColor, black, objColor,
+							 white, 80.0f));
+			break;
+			}
 
-	// Lit solid
-	case 3:
-	    {
-		// Set up the material properties
-		Color3f objColor = new Color3f(0.8f, 0.0f, 0.0f);
-		app.setMaterial(new Material(objColor, black, objColor,
-					     white, 80.0f));
-		break;
-	    }
+		// Texture mapped, lit solid
+		case 4:
+			{
+			// Set up the texture map
+			TextureLoader tex = new TextureLoader(texImage);
+			app.setTexture(tex.getTexture());
 
-	// Texture mapped, lit solid
-	case 4:
-	    {
-		// Set up the texture map
-		TextureLoader tex = new TextureLoader(texImage);
-		app.setTexture(tex.getTexture());
+			TextureAttributes texAttr = new TextureAttributes();
+			texAttr.setTextureMode(TextureAttributes.MODULATE);
+			app.setTextureAttributes(texAttr);
 
- 		TextureAttributes texAttr = new TextureAttributes();
- 		texAttr.setTextureMode(TextureAttributes.MODULATE);
- 		app.setTextureAttributes(texAttr);
- 
-		// Set up the material properties
-		app.setMaterial(new Material(white, black, white, black, 1.0f));
-		break;
-	    }
+			// Set up the material properties
+			app.setMaterial(new Material(white, black, white, black, 1.0f));
+			break;
+			}
 
-	// Transparent, lit solid
-	case 5:
-	    {
-		// Set up the transparency properties
-		TransparencyAttributes ta = new TransparencyAttributes();
-		ta.setTransparencyMode(ta.BLENDED);
-		ta.setTransparency(0.6f);
-		app.setTransparencyAttributes(ta);
+		// Transparent, lit solid
+		case 5:
+			{
+			// Set up the transparency properties
+			TransparencyAttributes ta = new TransparencyAttributes();
+			ta.setTransparencyMode(ta.BLENDED);
+			ta.setTransparency(0.6f);
+			app.setTransparencyAttributes(ta);
 
-		// Set up the polygon attributes
-		PolygonAttributes pa = new PolygonAttributes();
-		pa.setCullFace(pa.CULL_NONE);
-		app.setPolygonAttributes(pa);
+			// Set up the polygon attributes
+			PolygonAttributes pa = new PolygonAttributes();
+			pa.setCullFace(pa.CULL_NONE);
+			app.setPolygonAttributes(pa);
 
-		// Set up the material properties
-		Color3f objColor = new Color3f(0.7f, 0.8f, 1.0f);
-		app.setMaterial(new Material(objColor, black, objColor,
-					     black, 1.0f));
-		break;
-	    }
+			// Set up the material properties
+			Color3f objColor = new Color3f(0.7f, 0.8f, 1.0f);
+			app.setMaterial(new Material(objColor, black, objColor,
+							 black, 1.0f));
+			break;
+			}
 
-	// Lit solid, no specular
-	case 6:
-	    {
-		// Set up the material properties
-		Color3f objColor = new Color3f(0.8f, 0.0f, 0.0f);
-		app.setMaterial(new Material(objColor, black, objColor,
-					     black, 80.0f));
-		break;
-	    }
+		// Lit solid, no specular
+		case 6:
+			{
+			// Set up the material properties
+			Color3f objColor = new Color3f(0.8f, 0.0f, 0.0f);
+			app.setMaterial(new Material(objColor, black, objColor,
+							 black, 80.0f));
+			break;
+			}
 
-	// Lit solid, specular only
-	case 7:
-	    {
-		// Set up the material properties
-		Color3f objColor = new Color3f(0.8f, 0.0f, 0.0f);
-		app.setMaterial(new Material(black, black, black,
-					     white, 80.0f));
-		break;
-	    }
+		// Lit solid, specular only
+		case 7:
+			{
+			// Set up the material properties
+			Color3f objColor = new Color3f(0.8f, 0.0f, 0.0f);
+			app.setMaterial(new Material(black, black, black,
+							 white, 80.0f));
+			break;
+			}
 
-	// Another lit solid with a different color
-	case 8:
-	    {
-		// Set up the material properties
-		Color3f objColor = new Color3f(0.8f, 0.8f, 0.0f);
-		app.setMaterial(new Material(objColor, black, objColor,
-					     white, 80.0f));
-		break;
-	    }
+		// Another lit solid with a different color
+		case 8:
+			{
+			// Set up the material properties
+			Color3f objColor = new Color3f(0.8f, 0.8f, 0.0f);
+			app.setMaterial(new Material(objColor, black, objColor,
+							 white, 80.0f));
+			break;
+			}
 
-	default:
-	    {
-		ColoringAttributes ca = new ColoringAttributes();
-		ca.setColor(new Color3f(0.0f, 1.0f, 0.0f));
-		app.setColoringAttributes(ca);
-	    }
-	}
+		default:
+			{
+			ColoringAttributes ca = new ColoringAttributes();
+			ca.setColor(new Color3f(0.0f, 1.0f, 0.0f));
+			app.setColoringAttributes(ca);
+			}
+		}
 
-	return app;
+		return app;
     }
 
 

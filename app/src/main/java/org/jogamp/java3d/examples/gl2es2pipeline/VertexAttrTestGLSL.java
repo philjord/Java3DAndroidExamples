@@ -33,7 +33,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -64,7 +63,7 @@ import org.jogamp.java3d.SourceCodeShader;
 import org.jogamp.java3d.TransformGroup;
 import org.jogamp.java3d.TriangleArray;
 import org.jogamp.java3d.examples.alternate_appearance.AlternateAppearanceBoundsTest;
-import org.jogamp.java3d.examples.java3dhelloworld.R;
+import org.jogamp.java3d.examples.java3dexamples.R;
 import org.jogamp.java3d.utils.shader.SimpleShaderAppearance;
 import org.jogamp.java3d.utils.shader.StringIO;
 import org.jogamp.java3d.utils.universe.SimpleUniverse;
@@ -82,7 +81,6 @@ public class VertexAttrTestGLSL extends NewtBaseFragmentActivity {
 
 	public BranchGroup createSceneGraph(boolean hasVertexAttrs)
 	{
-
 		// Bounds for BG and behavior
 		BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
 
@@ -112,8 +110,6 @@ public class VertexAttrTestGLSL extends NewtBaseFragmentActivity {
 
 	private Canvas3D initScene()
 	{
-		//GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
-
 		Canvas3D c = new Canvas3D();
 		univ = new SimpleUniverse(c);
 

@@ -44,7 +44,6 @@
 
 package org.jogamp.java3d.examples.lod;
 
-
 import android.os.Bundle;
 
 import org.jogamp.java3d.AmbientLight;
@@ -81,51 +80,48 @@ public class LOD extends NewtBaseActivity {
     private TransformGroup objTrans;
 
     public BranchGroup createSceneGraph() {
-	// Create the root of the branch graph
-	BranchGroup objRoot = new BranchGroup();
+        // Create the root of the branch graph
+        BranchGroup objRoot = new BranchGroup();
 
-	createLights(objRoot);
+        createLights(objRoot);
 
-	// Create the transform group node and initialize it to the
-	// identity.  Enable the TRANSFORM_WRITE capability so that
-	// our behavior code can modify it at runtime.  Add it to the
-	// root of the subgraph.
-	objTrans = new TransformGroup();
-	objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-	objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-	objRoot.addChild(objTrans);
+        // Create the transform group node and initialize it to the
+        // identity.  Enable the TRANSFORM_WRITE capability so that
+        // our behavior code can modify it at runtime.  Add it to the
+        // root of the subgraph.
+        objTrans = new TransformGroup();
+        objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+        objRoot.addChild(objTrans);
 
-	// Create a switch to hold the different levels of detail
-	Switch sw = new Switch(0);
-	sw.setCapability(Switch.ALLOW_SWITCH_READ);
-	sw.setCapability(Switch.ALLOW_SWITCH_WRITE);
+        // Create a switch to hold the different levels of detail
+        Switch sw = new Switch(0);
+        sw.setCapability(Switch.ALLOW_SWITCH_READ);
+        sw.setCapability(Switch.ALLOW_SWITCH_WRITE);
 
+        // Create several levels for the switch, with less detailed
+        // spheres for the ones which will be used when the sphere is
+        // further away
+        sw.addChild(new Sphere(0.4f, Sphere.GENERATE_NORMALS, 60));
+        sw.addChild(new Sphere(0.4f, Sphere.GENERATE_NORMALS, 30));
+        sw.addChild(new Sphere(0.4f, Sphere.GENERATE_NORMALS, 10));
+        sw.addChild(new Sphere(0.4f, Sphere.GENERATE_NORMALS, 3));
 
-	// Create several levels for the switch, with less detailed
-	// spheres for the ones which will be used when the sphere is
-	// further away
-	sw.addChild(new Sphere(0.4f, Sphere.GENERATE_NORMALS, 60));
-	sw.addChild(new Sphere(0.4f, Sphere.GENERATE_NORMALS, 30));
-	sw.addChild(new Sphere(0.4f, Sphere.GENERATE_NORMALS, 10));
-	sw.addChild(new Sphere(0.4f, Sphere.GENERATE_NORMALS, 3));
+        // Add the switch to the main group
+        objTrans.addChild(sw);
 
-	// Add the switch to the main group
-	objTrans.addChild(sw);
+        BoundingSphere bounds =
+            new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0);
 
-	BoundingSphere bounds =
-	    new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0);
-
-	// set up the DistanceLOD behavior
-	float[] distances = new float[3];
-	distances[0] = 5.0f;
-	distances[1] = 10.0f;
-	distances[2] = 25.0f;
-	DistanceLOD lod = new DistanceLOD(distances);
-	lod.addSwitch(sw);
-	lod.setSchedulingBounds(bounds);
-	objTrans.addChild(lod);
-
-
+        // set up the DistanceLOD behavior
+        float[] distances = new float[3];
+        distances[0] = 5.0f;
+        distances[1] = 10.0f;
+        distances[2] = 25.0f;
+        DistanceLOD lod = new DistanceLOD(distances);
+        lod.addSwitch(sw);
+        lod.setSchedulingBounds(bounds);
+        objTrans.addChild(lod);
 
         // lets create a fun little behaviour to send teh sphere back and forth so we can see the lod making the switch
         Behavior b = new Behavior(){
@@ -139,23 +135,18 @@ public class LOD extends NewtBaseActivity {
 
             @Override
             public void processStimulus(Iterator<WakeupCriterion> criteria) {
-
                 //bit of odd wobbly maths
                 float newDist = (float)((Math.sin((System.currentTimeMillis() - startTime)  / 1000f) + 1) * 20);
-                //System.out.println("elapsed " +(System.currentTimeMillis() - startTime) + " new dist " + newDist);
 
                 Transform3D t = new Transform3D();
                 t.set(new Vector3f(0,0,-newDist));
 
                 objTrans.setTransform(t);
 
-
                 // Insert wakeup condition into queue
                 wakeupOn(wakeupFrame);
-
             }
         };
-
 
         b.setSchedulingBounds(bounds);
         objTrans.addChild(b);
@@ -163,7 +154,7 @@ public class LOD extends NewtBaseActivity {
         // Have Java 3D perform optimizations on this scene graph.
         objRoot.compile();
 
-	return objRoot;
+	    return objRoot;
     }
 
     private void createLights(BranchGroup graphRoot) {
@@ -187,46 +178,36 @@ public class LOD extends NewtBaseActivity {
     }
 
     private Canvas3D createUniverse() {
-	// Get the preferred graphics configuration for the default screen
-	//GraphicsConfiguration config =
-	//    SimpleUniverse.getPreferredConfiguration();
+        // Create a Canvas3D using the preferred configuration
+        Canvas3D c = new Canvas3D();
 
-	// Create a Canvas3D using the preferred configuration
-	Canvas3D c = new Canvas3D();
-
-	// Create simple universe with view branch
-	univ = new SimpleUniverse(c);
+        // Create simple universe with view branch
+        univ = new SimpleUniverse(c);
 
         // only add zoom mouse behavior to viewingPlatform
-	ViewingPlatform viewingPlatform = univ.getViewingPlatform();
-	
+        ViewingPlatform viewingPlatform = univ.getViewingPlatform();
+
         // This will move the ViewPlatform back a bit so the
         // objects in the scene can be viewed.
-	viewingPlatform.setNominalViewingTransform();
+        viewingPlatform.setNominalViewingTransform();
 
-	// add orbit behavior to the ViewingPlatform, but disable rotate
-	// and translate
-	/*OrbitBehavior orbit = new OrbitBehavior(c,
-						OrbitBehavior.REVERSE_ZOOM |
-						OrbitBehavior.DISABLE_ROTATE |
-						OrbitBehavior.DISABLE_TRANSLATE);
-	BoundingSphere bounds =
-	    new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
-	orbit.setSchedulingBounds(bounds);
-	viewingPlatform.setViewPlatformBehavior(orbit);  */     
-        
-	// This will move the ViewPlatform back a bit so the
-	// objects in the scene can be viewed.
-	univ.getViewingPlatform().setNominalViewingTransform();
+        // add orbit behavior to the ViewingPlatform, but disable rotate
+        // and translate
+        /*OrbitBehavior orbit = new OrbitBehavior(c,
+                            OrbitBehavior.REVERSE_ZOOM |
+                            OrbitBehavior.DISABLE_ROTATE |
+                            OrbitBehavior.DISABLE_TRANSLATE);
+        BoundingSphere bounds =
+            new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
+        orbit.setSchedulingBounds(bounds);
+        viewingPlatform.setViewPlatformBehavior(orbit);  */
 
-	// Ensure at least 5 msec per frame (i.e., < 200Hz)
-	univ.getViewer().getView().setMinimumFrameCycleTime(5);
+        // This will move the ViewPlatform back a bit so the
+        // objects in the scene can be viewed.
+        univ.getViewingPlatform().setNominalViewingTransform();
 
-
-
-
-
-
+        // Ensure at least 5 msec per frame (i.e., < 200Hz)
+        univ.getViewer().getView().setMinimumFrameCycleTime(5);
 
         return c;
     }
@@ -239,13 +220,10 @@ public class LOD extends NewtBaseActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         SimpleShaderAppearance.setVersionES300();
 
         // Create Canvas3D and SimpleUniverse; add canvas to drawing panel
         c = createUniverse();
-
 
         // Create the content branch and add it to the universe
         scene = createSceneGraph();
@@ -292,7 +270,5 @@ public class LOD extends NewtBaseActivity {
             e.printStackTrace();
         }
     }
-
-
     
 }

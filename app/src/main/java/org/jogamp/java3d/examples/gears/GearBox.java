@@ -44,8 +44,6 @@
 
 package org.jogamp.java3d.examples.gears;
 
- 
-
 import android.os.Bundle;
 
 import org.jogamp.java3d.Alpha;
@@ -300,10 +298,6 @@ public class GearBox extends NewtBaseActivity {
     }
 
     private Canvas3D createUniverse() {
-		// Get the preferred graphics configuration for the default screen
-		//GraphicsConfiguration config =
-		 //   SimpleUniverse.getPreferredConfiguration();
-	
 		// Create a Canvas3D using the preferred configuration
 		Canvas3D c = new Canvas3D();
 	
@@ -370,9 +364,7 @@ public class GearBox extends NewtBaseActivity {
 		// Create Canvas3D and SimpleUniverse; add canvas to drawing panel
 		c = createUniverse();
 
-
 		univ.addBranchGraph(scene);
-
 
 		// make the gl window the content of this app
 		this.setContentView(this.getWindow(), c.getGLWindow());

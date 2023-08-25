@@ -146,7 +146,6 @@ public class SphereMotionGL2ES2_Texture extends NewtBaseActivity {
 		ShaderAttributeSet shaderAttributeSet = new ShaderAttributeSet();
 		shaderAttributeSet.put(new ShaderAttributeValue("BaseMap", new Integer(0)));
 		a.setShaderAttributeSet(shaderAttributeSet);
-
 		
 		a.setMaterial(m);
 		Texture txtr = new TextureLoader(getClass().getResource("/resources/images/earth.jpg")).getTexture();
@@ -266,9 +265,6 @@ public class SphereMotionGL2ES2_Texture extends NewtBaseActivity {
 
 	private Canvas3D createUniverse()
 	{
-		// Get the preferred graphics configuration for the default screen
-		//GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
-
 		// Create a Canvas3D using the preferred configuration
 		Canvas3D c = new Canvas3D();
 
@@ -335,15 +331,13 @@ public class SphereMotionGL2ES2_Texture extends NewtBaseActivity {
 			}
 		}
 
-
-
 		// Create Canvas3D and SimpleUniverse; add canvas to drawing panel
-		  c = createUniverse();
-
+		c = createUniverse();
 
 		// Create the content branch and add it to the universe
 		scene = createSceneGraph();
 		univ.addBranchGraph(scene);
+
 		// make the gl window the content of this app
 		this.setContentView(this.getWindow(), c.getGLWindow());
 	}

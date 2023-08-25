@@ -60,7 +60,6 @@ import org.jogamp.java3d.ShaderProgram;
 import org.jogamp.java3d.Shape3D;
 import org.jogamp.java3d.Transform3D;
 import org.jogamp.java3d.TransformGroup;
-import org.jogamp.java3d.examples.gl2es2pipeline.EnvironmentMappingGLSL;
 import org.jogamp.java3d.loaders.IncorrectFormatException;
 import org.jogamp.java3d.loaders.ParsingErrorException;
 import org.jogamp.java3d.loaders.Scene;
@@ -73,13 +72,11 @@ import org.jogamp.vecmath.Color3f;
 import org.jogamp.vecmath.Point3d;
 import org.jogamp.vecmath.Vector3f;
 
-import javaawt.image.VMBufferedImage;
-import javaawt.imageio.VMImageIO;
 import jogamp.newt.driver.android.NewtBaseActivity;
 
 /**
- * Simple Java 3D example program to display an .obj object with shader programs.
- * And then add a stencil based outline around it
+ * Simple Java 3D example program to display two .obj objects with shader programs.
+ * And then adds a stencil based outline around one of them
  */
 public class StencilOutline extends NewtBaseActivity {
 
@@ -197,7 +194,7 @@ public class StencilOutline extends NewtBaseActivity {
 
 	private Canvas3D createUniverse()
 	{
-		// Critical!!! notice this is not using this call, but explicitly asks for a stencil buffer
+		//Notice this is not using this call, but this is how you explicitly ask for a stencil buffer
 		//GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();		
 		//GraphicsConfigTemplate3D template = new GraphicsConfigTemplate3D();
 		//template.setStencilSize(16);
@@ -281,7 +278,7 @@ public class StencilOutline extends NewtBaseActivity {
 		System.out.println("  -c Set crease angle for normal generation (default is 60 without");
 		System.out.println("     smoothing group info, otherwise 180 within smoothing groups)");
 		System.exit(0);
-	} // End of usage
+	}
 
 	// Set shader program for all nodes in specified branch graph
 	private void setShaderProgram(BranchGroup g, ShaderProgram shaderProgram)
@@ -359,7 +356,6 @@ public class StencilOutline extends NewtBaseActivity {
 				
 				//Uncomment to use the gl2es2 pipeline, also see other commented code
 				SimpleShaderAppearance app = new SimpleShaderAppearance(col);
-				
 
 				// lineAntialiasing MUST be true, to force this to be done during rendering pass (otherwise it's hidden)
 				LineAttributes la = new LineAttributes(4, LineAttributes.PATTERN_SOLID, true);
@@ -401,9 +397,6 @@ public class StencilOutline extends NewtBaseActivity {
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		javaawt.image.BufferedImage.installBufferedImageDelegate(VMBufferedImage.class);
-		javaawt.imageio.ImageIO.installBufferedImageImpl(VMImageIO.class);
 
 		SimpleShaderAppearance.setVersionES300();
 
@@ -489,11 +482,8 @@ public class StencilOutline extends NewtBaseActivity {
 			}
 		}
 
-
-
 		// Create Canvas3D and SimpleUniverse; add canvas to drawing panel
-		  c = createUniverse();
-
+		c = createUniverse();
 
 		// Create the content branch and add it to the universe
 		scene = createSceneGraph();

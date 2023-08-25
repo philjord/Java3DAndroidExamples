@@ -98,164 +98,163 @@ public class PureImmediateStereo extends NewtBaseActivity implements Runnable {
     // Compute data which is common for both
     // left and right eye
     void computeSharedData() {
-	// Compute angle of rotation based on alpha value
-	angle = rotAlpha.value() * 2.0*Math.PI;
-	cmt.rotY(angle);	
+		// Compute angle of rotation based on alpha value
+		angle = rotAlpha.value() * 2.0*Math.PI;
+		cmt.rotY(angle);
     }
 
     // Render the geometry in right eye
     void renderLeft() {
- 	cmt.setTranslation(leftTrans);
-	gc.setModelTransform(cmt);
+ 		cmt.setTranslation(leftTrans);
+		gc.setModelTransform(cmt);
 
-	if (sharedStereoZbuffer) {
-	    // Graphics card shared same z buffer in stereo mode,
-	    // in this case we have to explicitly clearing both
-	    // frame buffers.
-	    gc.clear(); 	    
-	}
-	gc.draw(leftConeBody);
-	gc.draw(leftConeCap);
+		if (sharedStereoZbuffer) {
+			// Graphics card shared same z buffer in stereo mode,
+			// in this case we have to explicitly clearing both
+			// frame buffers.
+			gc.clear();
+		}
+		gc.draw(leftConeBody);
+		gc.draw(leftConeCap);
     }
 
     // Render the geometry for right eye
-     void renderRight() {
-	cmt.setTranslation(rightTrans);
-	gc.setModelTransform(cmt);
+	void renderRight() {
+		cmt.setTranslation(rightTrans);
+		gc.setModelTransform(cmt);
 
-	if (sharedStereoZbuffer) {
-	    // Graphics card shared same z buffer in stereo mode,
-	    // in this case we have to explicitly clearing both
-	    // frame buffers.
-	    gc.clear(); 	    
-	}
-	gc.draw(rightConeBody);
-	gc.draw(rightConeCap);
+		if (sharedStereoZbuffer) {
+			// Graphics card shared same z buffer in stereo mode,
+			// in this case we have to explicitly clearing both
+			// frame buffers.
+			gc.clear();
+		}
+		gc.draw(rightConeBody);
+		gc.draw(rightConeCap);
     }
 
     //
     // Run method for our immediate mode rendering thread.
     //
     public void run() {
-	// Set up Graphics context
-	gc = c.getGraphicsContext3D();
+		// Set up Graphics context
+		gc = c.getGraphicsContext3D();
 
-	// We always need to set this for PureImmediate 
-	// stereo mode
-        gc.setBufferOverride(true);
+		// We always need to set this for PureImmediate
+		// stereo mode
+			gc.setBufferOverride(true);
 
-	Color3f lightColor = new Color3f(1, 1, 1);
-	Vector3f lightDir = new Vector3f(0, 0, -1);
-	DirectionalLight light = new DirectionalLight(lightColor,
-						      lightDir);
-					  
-	gc.addLight(light);
+		Color3f lightColor = new Color3f(1, 1, 1);
+		Vector3f lightDir = new Vector3f(0, 0, -1);
+		DirectionalLight light = new DirectionalLight(lightColor,
+								  lightDir);
 
-	SimpleShaderAppearance redApp = new SimpleShaderAppearance();
-	SimpleShaderAppearance greenApp = new SimpleShaderAppearance();
-	Color3f ambientColor = new Color3f(0, 0, 0);
-	Color3f emissiveColor = new Color3f(0, 0, 0);	
-	Color3f diffuseColor =  new Color3f(1, 0, 0);	
-	Color3f specularColor =  new Color3f(1, 1, 1);	
-	redApp.setMaterial(new Material(ambientColor, emissiveColor,
-					diffuseColor, specularColor, 5));
-	diffuseColor =  new Color3f(0, 1, 0);	
+		gc.addLight(light);
 
-	greenApp.setMaterial(new Material(ambientColor, emissiveColor,
-					  diffuseColor, specularColor, 5));
+		SimpleShaderAppearance redApp = new SimpleShaderAppearance();
+		SimpleShaderAppearance greenApp = new SimpleShaderAppearance();
+		Color3f ambientColor = new Color3f(0, 0, 0);
+		Color3f emissiveColor = new Color3f(0, 0, 0);
+		Color3f diffuseColor =  new Color3f(1, 0, 0);
+		Color3f specularColor =  new Color3f(1, 1, 1);
+		redApp.setMaterial(new Material(ambientColor, emissiveColor,
+						diffuseColor, specularColor, 5));
+		diffuseColor =  new Color3f(0, 1, 0);
 
-	// Set up geometry
-	Cone leftCone = new Cone(0.4f, 0.6f,
-				 Primitive.GENERATE_NORMALS, redApp);
-	Cone rightCone = new Cone(0.4f, 0.6f,
-				  Primitive.GENERATE_NORMALS, greenApp);
-	leftConeBody  = leftCone.getShape(Cone.BODY);
-	leftConeCap   = leftCone.getShape(Cone.CAP);
+		greenApp.setMaterial(new Material(ambientColor, emissiveColor,
+						  diffuseColor, specularColor, 5));
 
-	rightConeBody = rightCone.getShape(Cone.BODY);
-	rightConeCap  = rightCone.getShape(Cone.CAP);
-	leftTrans = new Vector3f(-0.6f, 0, 0); 
-	rightTrans = new Vector3f(0.6f, 0, 0); 	
+		// Set up geometry
+		Cone leftCone = new Cone(0.4f, 0.6f,
+					 Primitive.GENERATE_NORMALS, redApp);
+		Cone rightCone = new Cone(0.4f, 0.6f,
+					  Primitive.GENERATE_NORMALS, greenApp);
+		leftConeBody  = leftCone.getShape(Cone.BODY);
+		leftConeCap   = leftCone.getShape(Cone.CAP);
+
+		rightConeBody = rightCone.getShape(Cone.BODY);
+		rightConeCap  = rightCone.getShape(Cone.CAP);
+		leftTrans = new Vector3f(-0.6f, 0, 0);
+		rightTrans = new Vector3f(0.6f, 0, 0);
 
 
-	while (true) {
-	    // compute data which is can be used
-	    // for both left and right eye
-	    computeSharedData();
+		while (true) {
+			// compute data which is can be used
+			// for both left and right eye
+			computeSharedData();
 
-	    if (stereoSupport) {	    
-		if (!sharedStereoZbuffer) {
-		    gc.setStereoMode(GraphicsContext3D.STEREO_BOTH);	    
-		    // This clear both left and right buffers, we
-		    // must set STEREO_BOTH before it. Otherwise
-		    // it only clear LEFT or RIGHT buffer unless
-		    // this is invoke twice for each buffer.
-		    gc.clear(); 
+			if (stereoSupport) {
+			if (!sharedStereoZbuffer) {
+				gc.setStereoMode(GraphicsContext3D.STEREO_BOTH);
+				// This clear both left and right buffers, we
+				// must set STEREO_BOTH before it. Otherwise
+				// it only clear LEFT or RIGHT buffer unless
+				// this is invoke twice for each buffer.
+				gc.clear();
+			}
+
+			gc.setStereoMode(GraphicsContext3D.STEREO_LEFT);
+			renderLeft();
+
+			gc.setStereoMode(GraphicsContext3D.STEREO_RIGHT);
+			renderRight();
+			} else {
+			gc.clear();
+			renderLeft();
+			}
+
+			// This swap both left and right buffers so
+			// there is no need to set STEREO_BOTH before it
+			c.swap();
+
+			// Be polite to other threads !
+			Thread.yield();
 		}
-
-		gc.setStereoMode(GraphicsContext3D.STEREO_LEFT);
-		renderLeft();
-		
-		gc.setStereoMode(GraphicsContext3D.STEREO_RIGHT);
-		renderRight();
-	    } else {
-		gc.clear(); 
-		renderLeft();
-	    }
-
-	    // This swap both left and right buffers so 
-	    // there is no need to set STEREO_BOTH before it
-	    c.swap();
-
-	    // Be polite to other threads !
-	    Thread.yield();
-	}
     }
 
 
     private void createUniverse() {
-	// Preferred to use Stereo 
-	//GraphicsConfigTemplate3D gct = new GraphicsConfigTemplate3D();
-    //    gct.setStereo(GraphicsConfigTemplate3D.PREFERRED);
-
-        //GraphicsConfiguration config = 
+		// Preferred to use Stereo
+		//GraphicsConfigTemplate3D gct = new GraphicsConfigTemplate3D();
+    	//    gct.setStereo(GraphicsConfigTemplate3D.PREFERRED);
+        //GraphicsConfiguration config =
 	    //GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getBestConfiguration(gct);
 
         c = new Canvas3D();
-	Map map = c.queryProperties();
+		Map map = c.queryProperties();
 
-	stereoSupport = c.getStereoAvailable();
+		stereoSupport = c.getStereoAvailable();
 
-	if (stereoSupport) {
-	    System.out.println("This machine support stereo, you should see a red cone on the left and green cone on the right.");
-	    // User can overide the above default behavior using
-	    // java3d property.
-	    String str = System.getProperty("j3d.sharedstereozbuffer",
-					    defaultSharedStereoZbuffer);
-	    sharedStereoZbuffer = (new Boolean(str)).booleanValue();
-	} else {
-	    System.out.println("Stereo is not support, you should only see the left red cone.");
-	}
-	
-	if (!c.getDoubleBufferAvailable()) {
-	    System.out.println("Double buffer is not support !");
-	}
+		if (stereoSupport) {
+			System.out.println("This machine support stereo, you should see a red cone on the left and green cone on the right.");
+			// User can overide the above default behavior using
+			// java3d property.
+			String str = System.getProperty("j3d.sharedstereozbuffer",
+							defaultSharedStereoZbuffer);
+			sharedStereoZbuffer = (new Boolean(str)).booleanValue();
+		} else {
+			System.out.println("Stereo is not support, you should only see the left red cone.");
+		}
 
-	// we must stop the Renderer in PureImmediate mode
-        c.stopRenderer();
+		if (!c.getDoubleBufferAvailable()) {
+			System.out.println("Double buffer is not support !");
+		}
 
-	// Create simple universe with view branch
-	univ = new SimpleUniverse(c);
+		// we must stop the Renderer in PureImmediate mode
+		c.stopRenderer();
 
-	// This will move the ViewPlatform back a bit so the
-	// objects in the scene can be viewed.
-	univ.getViewingPlatform().setNominalViewingTransform();
+		// Create simple universe with view branch
+		univ = new SimpleUniverse(c);
 
-	// Ensure at least 5 msec per frame (i.e., < 200Hz)
-	univ.getViewer().getView().setMinimumFrameCycleTime(5);
+		// This will move the ViewPlatform back a bit so the
+		// objects in the scene can be viewed.
+		univ.getViewingPlatform().setNominalViewingTransform();
 
-        // Start a new thread that will continuously render
-	(new Thread(this)).start();
+		// Ensure at least 5 msec per frame (i.e., < 200Hz)
+		univ.getViewer().getView().setMinimumFrameCycleTime(5);
+
+			// Start a new thread that will continuously render
+		(new Thread(this)).start();
     }
 
 	// ----------------------------------------------------------------
@@ -268,9 +267,9 @@ public class PureImmediateStereo extends NewtBaseActivity implements Runnable {
 
 		SimpleShaderAppearance.setVersionES300();
 
-	// Create Canvas3D and SimpleUniverse; add canvas to drawing panel
-	createUniverse();
-	//canvas.addNotify();//drawingPanel.add(canvas, java.awt.BorderLayout.CENTER);
+		// Create Canvas3D and SimpleUniverse; add canvas to drawing panel
+		createUniverse();
+		//canvas.addNotify();//drawingPanel.add(canvas, java.awt.BorderLayout.CENTER);
 		// make the gl window the content of this app
 		this.setContentView(this.getWindow(), c.getGLWindow());
 	}

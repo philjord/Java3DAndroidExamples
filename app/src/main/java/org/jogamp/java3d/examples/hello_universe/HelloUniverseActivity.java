@@ -1,7 +1,6 @@
 package org.jogamp.java3d.examples.hello_universe;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import org.jogamp.java3d.Alpha;
 import org.jogamp.java3d.BoundingSphere;
@@ -15,9 +14,6 @@ import org.jogamp.java3d.utils.shader.SimpleShaderAppearance;
 import org.jogamp.java3d.utils.universe.SimpleUniverse;
 import org.jogamp.vecmath.Point3d;
 
-
-import java.io.PrintStream;
-
 import jogamp.newt.driver.android.NewtBaseActivity;
 
 public class HelloUniverseActivity extends NewtBaseActivity {
@@ -29,19 +25,6 @@ public class HelloUniverseActivity extends NewtBaseActivity {
     public void onCreate(final Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        // get system out and err to log for logcat
-        System.setOut(new PrintStream(System.out, true) {
-            public void print(String s) {
-                Log.w("sysout", s);
-
-            }
-        });
-        System.setOut(new PrintStream(System.err, true) {
-            public void print(String s) {
-                Log.w("syserr", s);
-
-            }
-        });
 
         SimpleShaderAppearance.setVersionES300();
 

@@ -44,10 +44,8 @@
 
 package org.jogamp.java3d.examples.fps_counter;
 
-
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.TextView;
 
 import com.jogamp.opengl.GLAutoDrawable;
@@ -60,14 +58,12 @@ import org.jogamp.java3d.Canvas3D;
 import org.jogamp.java3d.RotationInterpolator;
 import org.jogamp.java3d.Transform3D;
 import org.jogamp.java3d.TransformGroup;
-import org.jogamp.java3d.examples.java3dhelloworld.R;
+import org.jogamp.java3d.examples.java3dexamples.R;
 import org.jogamp.java3d.utils.geometry.ColorCube;
 import org.jogamp.java3d.utils.shader.SimpleShaderAppearance;
 import org.jogamp.java3d.utils.universe.SimpleUniverse;
 import org.jogamp.vecmath.Point3d;
 
-import javaawt.image.VMBufferedImage;
-import javaawt.imageio.VMImageIO;
 import jogamp.newt.driver.android.NewtBaseActivity;
 
 /**
@@ -90,59 +86,56 @@ public class FPSCounterDemo extends NewtBaseActivity {
 	private TextView fpsTextView;
     
     BranchGroup createSceneGraph() {
-	// Create the root of the branch graph
-	BranchGroup objRoot = new BranchGroup();
+		// Create the root of the branch graph
+		BranchGroup objRoot = new BranchGroup();
 
-	// Create the TransformGroup node and initialize it to the
-	// identity. Enable the TRANSFORM_WRITE capability so that
-	// our behavior code can modify it at run time. Add it to
-	// the root of the subgraph.
-	TransformGroup objTrans = new TransformGroup();
-	objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-	objRoot.addChild(objTrans);
+		// Create the TransformGroup node and initialize it to the
+		// identity. Enable the TRANSFORM_WRITE capability so that
+		// our behavior code can modify it at run time. Add it to
+		// the root of the subgraph.
+		TransformGroup objTrans = new TransformGroup();
+		objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+		objRoot.addChild(objTrans);
 
-	// Create a simple Shape3D node; add it to the scene graph.
-	objTrans.addChild(new ColorCube(0.4));
+		// Create a simple Shape3D node; add it to the scene graph.
+		objTrans.addChild(new ColorCube(0.4));
 
-	// Create a new Behavior object that will perform the
-	// desired operation on the specified transform and add
-	// it into the scene graph.
-	Transform3D yAxis = new Transform3D();
-	Alpha rotationAlpha = new Alpha(-1, 4000);
+		// Create a new Behavior object that will perform the
+		// desired operation on the specified transform and add
+		// it into the scene graph.
+		Transform3D yAxis = new Transform3D();
+		Alpha rotationAlpha = new Alpha(-1, 4000);
 
-	RotationInterpolator rotator =
-		new RotationInterpolator(rotationAlpha, objTrans, yAxis,
-				 0.0f, (float) Math.PI*2.0f);
-	BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0),
-						100.0);
-	rotator.setSchedulingBounds(bounds);
-	objRoot.addChild(rotator);
+		RotationInterpolator rotator =
+			new RotationInterpolator(rotationAlpha, objTrans, yAxis,
+					 0.0f, (float) Math.PI*2.0f);
+		BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0),
+							100.0);
+		rotator.setSchedulingBounds(bounds);
+		objRoot.addChild(rotator);
 
-	// Create the Framecounter behavior
-	fpsCounter.setSchedulingBounds(bounds);
-	objRoot.addChild(fpsCounter);
+		// Create the Framecounter behavior
+		fpsCounter.setSchedulingBounds(bounds);
+		objRoot.addChild(fpsCounter);
 
 		fpsCounter.setOutputView(fpsTextView);
 
-	return objRoot;
+		return objRoot;
     }
 
     private Canvas3D createUniverse() {
-	// Get the preferred graphics configuration for the default screen
-	//GraphicsConfiguration config =
-	//    SimpleUniverse.getPreferredConfiguration();
 
-	// Create a Canvas3D using the preferred configuration
-	Canvas3D c = new Canvas3D();
+		// Create a Canvas3D using the preferred configuration
+		Canvas3D c = new Canvas3D();
 
-	// Create simple universe with view branch
-	univ = new SimpleUniverse(c);
+		// Create simple universe with view branch
+		univ = new SimpleUniverse(c);
 
-	// This will move the ViewPlatform back a bit so the
-	// objects in the scene can be viewed.
-	univ.getViewingPlatform().setNominalViewingTransform();
+		// This will move the ViewPlatform back a bit so the
+		// objects in the scene can be viewed.
+		univ.getViewingPlatform().setNominalViewingTransform();
 
-	return c;
+		return c;
     }
 
 	// ----------------------------------------------------------------
@@ -153,11 +146,7 @@ public class FPSCounterDemo extends NewtBaseActivity {
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		javaawt.image.BufferedImage.installBufferedImageDelegate(VMBufferedImage.class);
-		javaawt.imageio.ImageIO.installBufferedImageImpl(VMImageIO.class);
-
 		SimpleShaderAppearance.setVersionES300();
-
         
         // Create Canvas3D and SimpleUniverse; add canvas to drawing panel
         c = createUniverse();
@@ -181,9 +170,7 @@ public class FPSCounterDemo extends NewtBaseActivity {
 		// make the gl window the content of this app
 		this.setContentView(this.getWindow(), c.getGLWindow());
 
-
 		c.getGLWindow().addGLEventListener(glWindowInitListener);
-
 	}
 
 
@@ -270,42 +257,42 @@ public class FPSCounterDemo extends NewtBaseActivity {
      */
    private void parseArgs(String args[]) {
       for(int i = 0; i < args.length; i++) {
-	  if(args[i].startsWith("-")) {
-	      if(args[i].startsWith("w", 1)) {
-		  i++;
-		  System.out.println("Warmup time : " + args[i]);
-		  int w = new Integer(args[i]).intValue();
-		  fpsCounter.setWarmupTime(w);
-	      }
-	      else if(args[i].startsWith("l", 1)) {
-		  i++;
-		  System.out.println("Loop count : " + args[i]);
-		  int l = new Integer(args[i]).intValue();
-		  fpsCounter.setLoopCount(l);
-	      }
-	      else if(args[i].startsWith("m", 1)) {
-		  i++;
-		  System.out.println("Max Loop Count : " + args[i]);
-		  int m = new Integer(args[i]).intValue();
-		  fpsCounter.setMaxLoops(m);
-	      }
-	      else if(args[i].startsWith("h", 1)) {
-		  System.out.println("Usage : FPSCounterDemo [-name value]\n" +
-		       "All arguments are of the form: -name value. All -name arguments can be\n" +
-		       "shortened to one character. All the value arguments take a number. The\n" +
-		       "arguments accepted are:\n\n" +
-		       "    -warmupTime : Specifies amount of time the FPSCounter should wait\n" +
-		       "        for the HotSpot(tm) VM to perform initial\n" +
-		       "        optimizations. Specified in milliseconds\n\n" +
-		       "    -loopCount : Specifies the number of sampling intervals over which\n" +
-		       "        the FPSCounter should calculate the aggregate and average\n" +
-		       "        frame rate. Specified as a count\n\n" +
-		       "    -maxLoops : Specifies that the FPSCounter should run for only these\n" +
-		       "        many sampling intervals. Specified as number. If this argument\n" +
-		       "        is not specified, the FPSCounter runs indefinitely.\n\n" +
-		       "    -help : Prints this message.");
-	      }
-	  }
+		  if(args[i].startsWith("-")) {
+			  if(args[i].startsWith("w", 1)) {
+			  i++;
+			  System.out.println("Warmup time : " + args[i]);
+			  int w = new Integer(args[i]).intValue();
+			  fpsCounter.setWarmupTime(w);
+			  }
+			  else if(args[i].startsWith("l", 1)) {
+			  i++;
+			  System.out.println("Loop count : " + args[i]);
+			  int l = new Integer(args[i]).intValue();
+			  fpsCounter.setLoopCount(l);
+			  }
+			  else if(args[i].startsWith("m", 1)) {
+			  i++;
+			  System.out.println("Max Loop Count : " + args[i]);
+			  int m = new Integer(args[i]).intValue();
+			  fpsCounter.setMaxLoops(m);
+			  }
+			  else if(args[i].startsWith("h", 1)) {
+			  System.out.println("Usage : FPSCounterDemo [-name value]\n" +
+				   "All arguments are of the form: -name value. All -name arguments can be\n" +
+				   "shortened to one character. All the value arguments take a number. The\n" +
+				   "arguments accepted are:\n\n" +
+				   "    -warmupTime : Specifies amount of time the FPSCounter should wait\n" +
+				   "        for the HotSpot(tm) VM to perform initial\n" +
+				   "        optimizations. Specified in milliseconds\n\n" +
+				   "    -loopCount : Specifies the number of sampling intervals over which\n" +
+				   "        the FPSCounter should calculate the aggregate and average\n" +
+				   "        frame rate. Specified as a count\n\n" +
+				   "    -maxLoops : Specifies that the FPSCounter should run for only these\n" +
+				   "        many sampling intervals. Specified as number. If this argument\n" +
+				   "        is not specified, the FPSCounter runs indefinitely.\n\n" +
+				   "    -help : Prints this message.");
+			  }
+		  }
       }
    }
 

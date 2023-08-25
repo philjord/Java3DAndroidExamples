@@ -44,7 +44,6 @@
 
 package org.jogamp.java3d.examples.depth_func;
 
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,7 +77,6 @@ import org.jogamp.vecmath.Point3f;
 import org.jogamp.vecmath.Vector3f;
 
 import jogamp.newt.driver.android.NewtBaseFragment;
-
 
 public class RenderFrame extends NewtBaseFragment {
 

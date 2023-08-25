@@ -79,7 +79,6 @@ public class ReadRaster extends NewtBaseActivity {
 
 	public BranchGroup createSceneGraph(BufferedImage bImage, Raster readRaster)
 	{
-
 		// Create the root of the branch graph
 		BranchGroup objRoot = new BranchGroup();
 
@@ -93,7 +92,7 @@ public class ReadRaster extends NewtBaseActivity {
 		drawRaster.setCapability(Raster.ALLOW_IMAGE_WRITE);
 		objRoot.addChild(shape);
 
-		// Ceate the transform greup node and initialize it to the
+		// Create the transform group node and initialize it to the
 		// identity.  Enable the TRANSFORM_WRITE capability so that
 		// our behavior code can modify it at runtime.  Add it to the
 		// root of the subgraph.
@@ -148,11 +147,7 @@ public class ReadRaster extends NewtBaseActivity {
 
 		Raster readRaster = new Raster(new Point3f(0.0f, 0.0f, 0.0f), Raster.RASTER_COLOR, 0, 0, width, height, readImageComponent, null);
 
-
-		//GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
-
 		c = new myCanvas3D( readRaster);
-
 
 		// Create a simple scene and attach it to the virtual universe
 		BufferedImage bImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -209,13 +204,11 @@ public class ReadRaster extends NewtBaseActivity {
 
 	class myCanvas3D extends Canvas3D
 	{
-
 		Raster readRaster;
 		GraphicsContext3D gc;
 
 		public myCanvas3D(Raster readRaster)
 		{
-
 			super();
 			this.readRaster = readRaster;
 			gc = getGraphicsContext3D();
@@ -243,7 +236,6 @@ public class ReadRaster extends NewtBaseActivity {
 		public myRotationInterpolator(Raster drawRaster, Raster readRaster, Alpha alpha, TransformGroup target, Transform3D axisOfRotation,
 				float minimumAngle, float maximumAngle)
 		{
-
 			super(alpha, target, axisOfRotation, minimumAngle, maximumAngle);
 			this.drawRaster = drawRaster;
 			this.readRaster = readRaster;
@@ -252,7 +244,6 @@ public class ReadRaster extends NewtBaseActivity {
 		@Override
 		public void processStimulus(Iterator<WakeupCriterion> criteria)
 		{
-
 			synchronized (readRaster)
 			{
 				bImage = readRaster.getImage().getImage();

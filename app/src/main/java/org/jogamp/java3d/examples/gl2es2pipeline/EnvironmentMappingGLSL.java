@@ -151,9 +151,6 @@ public class EnvironmentMappingGLSL extends NewtBaseActivity {
 		rotator.setSchedulingBounds(bounds);
 		objRoot.addChild(rotator);
 
-		// Have Java 3D perform optimizations on this scene graph.
-		//objRoot.compile();
-
 		return objRoot;
 	}
 
@@ -161,8 +158,6 @@ public class EnvironmentMappingGLSL extends NewtBaseActivity {
 
 	private Canvas3D initScene()
 	{
-		//GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
-
 		Canvas3D c = new Canvas3D();
 
 		BranchGroup scene = createSceneGraph();

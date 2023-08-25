@@ -44,7 +44,6 @@
 
 package org.jogamp.java3d.examples.pure_immediate;
 
-
 import android.os.Bundle;
 
 import org.jogamp.java3d.Alpha;
@@ -67,10 +66,8 @@ import jogamp.newt.driver.android.NewtBaseActivity;
  */
 public class PureImmediate extends NewtBaseActivity implements Runnable {
 
-
     private SimpleUniverse univ = null;
     private BranchGroup scene = null;
-
 
     private GraphicsContext3D gc = null;
     private Geometry cube = null;
@@ -84,55 +81,52 @@ public class PureImmediate extends NewtBaseActivity implements Runnable {
     // geometry, and swapping the draw and display buffer.
     //
     public void render() {
-	if (gc == null) {
-	    // Set up Graphics context
-	    gc = c.getGraphicsContext3D();
-	    gc.setAppearance(new SimpleShaderAppearance());
+        if (gc == null) {
+            // Set up Graphics context
+            gc = c.getGraphicsContext3D();
+            gc.setAppearance(new SimpleShaderAppearance());
 
-	    // Set up geometry
-	    cube = new ColorCube(0.4).getGeometry();
-	}
+            // Set up geometry
+            cube = new ColorCube(0.4).getGeometry();
+        }
 
-	// Compute angle of rotation based on alpha value
-	double angle = rotAlpha.value() * 2.0*Math.PI;
-	cmt.rotY(angle);
- 
-	// Render the geometry for this frame
-	gc.clear();
-	gc.setModelTransform(cmt);
-	gc.draw(cube);
-	c.swap();
+        // Compute angle of rotation based on alpha value
+        double angle = rotAlpha.value() * 2.0*Math.PI;
+        cmt.rotY(angle);
+
+        // Render the geometry for this frame
+        gc.clear();
+        gc.setModelTransform(cmt);
+        gc.draw(cube);
+        c.swap();
     }
 
     //
     // Run method for our immediate mode rendering thread.
     //
     public void run() {
-	System.out.println("PureImmediate.run: starting main loop");
-	while (true) {
-	    render();
-	    Thread.yield();
-	}
+	    System.out.println("PureImmediate.run: starting main loop");
+	    while (true) {
+	        render();
+	        Thread.yield();
+	    }
     }
 
 
     private void createUniverse() {
-	// Get the preferred graphics configuration for the default screen
-	//GraphicsConfiguration config =
-	//    SimpleUniverse.getPreferredConfiguration();
-
-	// Create a Canvas3D using the preferred configuration
-	c = new Canvas3D();
+        // Create a Canvas3D using the preferred configuration
+        c = new Canvas3D();
         c.stopRenderer();
-	// Create simple universe with view branch
-	univ = new SimpleUniverse(c);
 
-	// This will move the ViewPlatform back a bit so the
-	// objects in the scene can be viewed.
-	univ.getViewingPlatform().setNominalViewingTransform();
+        // Create simple universe with view branch
+        univ = new SimpleUniverse(c);
 
-	// Ensure at least 5 msec per frame (i.e., < 200Hz)
-	univ.getViewer().getView().setMinimumFrameCycleTime(5);
+        // This will move the ViewPlatform back a bit so the
+        // objects in the scene can be viewed.
+        univ.getViewingPlatform().setNominalViewingTransform();
+
+        // Ensure at least 5 msec per frame (i.e., < 200Hz)
+        univ.getViewer().getView().setMinimumFrameCycleTime(5);
     }
 
     // ----------------------------------------------------------------
@@ -145,12 +139,11 @@ public class PureImmediate extends NewtBaseActivity implements Runnable {
 
         SimpleShaderAppearance.setVersionES300();
 
-	// Create Canvas3D and SimpleUniverse; add canvas to drawing panel
-	createUniverse();
-
+        // Create Canvas3D and SimpleUniverse; add canvas to drawing panel
+	    createUniverse();
         
         // Start a new thread that will continuously render
-	new Thread(this).start();
+	    new Thread(this).start();
         // make the gl window the content of this app
         this.setContentView(this.getWindow(), c.getGLWindow());
     }

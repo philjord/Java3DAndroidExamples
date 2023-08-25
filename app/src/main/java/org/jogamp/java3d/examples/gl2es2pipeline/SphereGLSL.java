@@ -73,8 +73,6 @@ import org.jogamp.vecmath.Point3f;
 import org.jogamp.vecmath.Vector3d;
 import org.jogamp.vecmath.Vector3f;
 
-import javaawt.image.VMBufferedImage;
-import javaawt.imageio.VMImageIO;
 import jogamp.newt.driver.android.NewtBaseActivity;
 
 /**
@@ -272,9 +270,6 @@ public class SphereGLSL extends NewtBaseActivity {
 
 	private Canvas3D createUniverse()
 	{
-		// Get the preferred graphics configuration for the default screen
-		//GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
-
 		// Create a Canvas3D using the preferred configuration
 		Canvas3D canvas3d = new Canvas3D();
 
@@ -315,11 +310,7 @@ public class SphereGLSL extends NewtBaseActivity {
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		javaawt.image.BufferedImage.installBufferedImageDelegate(VMBufferedImage.class);
-		javaawt.imageio.ImageIO.installBufferedImageImpl(VMImageIO.class);
-
 		SimpleShaderAppearance.setVersionES300();
-
 
 		// Create Canvas3D and SimpleUniverse; add canvas to drawing panel
 		c = createUniverse();

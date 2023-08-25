@@ -55,7 +55,6 @@ import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -74,8 +73,7 @@ import org.jogamp.java3d.Material;
 import org.jogamp.java3d.Transform3D;
 import org.jogamp.java3d.TransformGroup;
 import org.jogamp.java3d.examples.alternate_appearance.AlternateAppearanceBoundsTest;
-import org.jogamp.java3d.examples.java3dhelloworld.R;
-import org.jogamp.java3d.utils.applet.MainFrame;
+import org.jogamp.java3d.examples.java3dexamples.R;
 import org.jogamp.java3d.utils.behaviors.interpolators.KBKeyFrame;
 import org.jogamp.java3d.utils.behaviors.interpolators.KBRotPosScaleSplinePathInterpolator;
 import org.jogamp.java3d.utils.geometry.Cone;
@@ -89,10 +87,8 @@ import org.jogamp.vecmath.Point3f;
 import org.jogamp.vecmath.Vector3d;
 import org.jogamp.vecmath.Vector3f;
 
-import jogamp.newt.driver.android.NewtBaseActivity;
 import jogamp.newt.driver.android.NewtBaseFragment;
 import jogamp.newt.driver.android.NewtBaseFragmentActivity;
-
 
 /*
  * This program demonstrates the use of KBRotPosScaleSplinePathInterpolator 
@@ -105,16 +101,14 @@ import jogamp.newt.driver.android.NewtBaseFragmentActivity;
  * Use the middle mouse button to zoom in/out
  * Use the right mouse button to pan the scene 
  */
-public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.OnItemSelectedListener, NumberPicker.OnValueChangeListener{
-
-
+public class SplineAnim extends NewtBaseFragmentActivity
+        implements AdapterView.OnItemSelectedListener, NumberPicker.OnValueChangeListener{
 
     // UI Components
 
     Button animateButton;
     Spinner  interpChoice;
     NumberPicker speedSlider;
-
 
     // Scene Graph
     BoundingSphere     bounds;
@@ -190,22 +184,20 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
         // Add viewing platform  
         u = new SimpleUniverse(c);
 
-	// add mouse behaviors to ViewingPlatform
-	ViewingPlatform viewingPlatform = u.getViewingPlatform();
+	    // add mouse behaviors to ViewingPlatform
+	    ViewingPlatform viewingPlatform = u.getViewingPlatform();
 	
         viewingPlatform.setNominalViewingTransform();
 
-	// add orbit behavior to the ViewingPlatform
-	/*OrbitBehavior orbit = new OrbitBehavior(canvas,
-						OrbitBehavior.REVERSE_ALL);
-	BoundingSphere bounds =
-	    new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
-	orbit.setSchedulingBounds(bounds);
-	viewingPlatform.setViewPlatformBehavior(orbit);*/
+        // add orbit behavior to the ViewingPlatform
+        /*OrbitBehavior orbit = new OrbitBehavior(canvas,
+                            OrbitBehavior.REVERSE_ALL);
+        BoundingSphere bounds =
+            new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
+        orbit.setSchedulingBounds(bounds);
+        viewingPlatform.setViewPlatformBehavior(orbit);*/
 	
         u.addBranchGraph(scene);
-
-
 
         // Android Fragments are a pain...
         NewtBaseFragment nbf = new AlternateAppearanceBoundsTest.NewtBaseFragment2(c.getGLWindow());
@@ -214,8 +206,6 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
         fragmentTransaction.add(R.id.java3dSpace, nbf);
         fragmentTransaction.commit();
     }
-
-
 
 
     // create a NewtBaseFragment Fragment and put it into the frame layout waiting for it
@@ -294,135 +284,135 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
      */
     public BranchGroup createSceneGraph() {
 
-      // Colors for lights and objects
-      Color3f aColor     = new Color3f(0.2f, 0.2f, 0.2f);
-      Color3f eColor     = new Color3f(0.0f, 0.0f, 0.0f);
-      Color3f sColor     = new Color3f(1.0f, 1.0f, 1.0f);
-      Color3f coneColor  = new Color3f(0.9f, 0.1f, 0.1f);
-      Color3f sphereColor= new Color3f(0.1f, 0.7f, 0.9f);
-      Color3f bgColor    = new Color3f(0.0f, 0.0f, 0.0f);
-      Color3f lightColor = new Color3f(1.0f, 1.0f, 1.0f);
+        // Colors for lights and objects
+        Color3f aColor     = new Color3f(0.2f, 0.2f, 0.2f);
+        Color3f eColor     = new Color3f(0.0f, 0.0f, 0.0f);
+        Color3f sColor     = new Color3f(1.0f, 1.0f, 1.0f);
+        Color3f coneColor  = new Color3f(0.9f, 0.1f, 0.1f);
+        Color3f sphereColor= new Color3f(0.1f, 0.7f, 0.9f);
+        Color3f bgColor    = new Color3f(0.0f, 0.0f, 0.0f);
+        Color3f lightColor = new Color3f(1.0f, 1.0f, 1.0f);
 
-      // Root of the branch grsph
-      BranchGroup root = new BranchGroup();
+        // Root of the branch grsph
+        BranchGroup root = new BranchGroup();
 
-      // Create transforms such that all objects appears in the scene
-      sceneTransform = new Transform3D();
-      sceneTransform.setScale(0.14f);
-      Transform3D yrot = new Transform3D(); 
-      yrot.rotY(-Math.PI/5.0d);
-      sceneTransform.mul(yrot);
-      sceneTransformGroup = new TransformGroup(sceneTransform);
-      sceneTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-      sceneTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-      root.addChild(sceneTransformGroup);
+        // Create transforms such that all objects appears in the scene
+        sceneTransform = new Transform3D();
+        sceneTransform.setScale(0.14f);
+        Transform3D yrot = new Transform3D();
+        yrot.rotY(-Math.PI/5.0d);
+        sceneTransform.mul(yrot);
+        sceneTransformGroup = new TransformGroup(sceneTransform);
+        sceneTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        sceneTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+        root.addChild(sceneTransformGroup);
 
-      // Create bounds for the background and lights
-      bounds =  new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0f);
-      
-      // Set up the background
-      Background bg = new Background(bgColor);
-      bg.setApplicationBounds(bounds);
-      sceneTransformGroup.addChild(bg);
+        // Create bounds for the background and lights
+        bounds =  new BoundingSphere(new Point3d(0.0,0.0,0.0), 100.0f);
 
-      // Create the transform group node for the lights 
-      lightTransform1 = new Transform3D();
-      lightTransform2 = new Transform3D();
-      Vector3d lightPos1 =  new Vector3d(0.0, 0.0, 2.0);
-      Vector3d lightPos2 =  new Vector3d(1.0, 0.0, -2.0);
-      lightTransform1.set(lightPos1);
-      lightTransform2.set(lightPos2);
-      light1TransformGroup = new TransformGroup(lightTransform1);
-      light2TransformGroup = new TransformGroup(lightTransform2);
-      sceneTransformGroup.addChild(light1TransformGroup);
-      sceneTransformGroup.addChild(light2TransformGroup);
+        // Set up the background
+        Background bg = new Background(bgColor);
+        bg.setApplicationBounds(bounds);
+        sceneTransformGroup.addChild(bg);
 
-      // Create lights
-      AmbientLight ambLight = new AmbientLight(aColor);
-      Light        dirLight1;
-      Light        dirLight2;
+        // Create the transform group node for the lights
+        lightTransform1 = new Transform3D();
+        lightTransform2 = new Transform3D();
+        Vector3d lightPos1 =  new Vector3d(0.0, 0.0, 2.0);
+        Vector3d lightPos2 =  new Vector3d(1.0, 0.0, -2.0);
+        lightTransform1.set(lightPos1);
+        lightTransform2.set(lightPos2);
+        light1TransformGroup = new TransformGroup(lightTransform1);
+        light2TransformGroup = new TransformGroup(lightTransform2);
+        sceneTransformGroup.addChild(light1TransformGroup);
+        sceneTransformGroup.addChild(light2TransformGroup);
 
-      Vector3f lightDir1 = new Vector3f(lightPos1);
-      Vector3f lightDir2 = new Vector3f(lightPos2);
-      lightDir1.negate();
-      lightDir2.negate();
-      dirLight1 = new DirectionalLight(lightColor, lightDir1);
-      dirLight2 = new DirectionalLight(lightColor, lightDir2);
+        // Create lights
+        AmbientLight ambLight = new AmbientLight(aColor);
+        Light        dirLight1;
+        Light        dirLight2;
 
-      // Set the influencing bounds
-      ambLight.setInfluencingBounds(bounds);
-      dirLight1.setInfluencingBounds(bounds);
-      dirLight2.setInfluencingBounds(bounds);
+        Vector3f lightDir1 = new Vector3f(lightPos1);
+        Vector3f lightDir2 = new Vector3f(lightPos2);
+        lightDir1.negate();
+        lightDir2.negate();
+        dirLight1 = new DirectionalLight(lightColor, lightDir1);
+        dirLight2 = new DirectionalLight(lightColor, lightDir2);
 
-      // Add the lights into the scene graph
-      sceneTransformGroup.addChild(ambLight);
-      sceneTransformGroup.addChild(dirLight1);
-      sceneTransformGroup.addChild(dirLight2);
+        // Set the influencing bounds
+        ambLight.setInfluencingBounds(bounds);
+        dirLight1.setInfluencingBounds(bounds);
+        dirLight2.setInfluencingBounds(bounds);
 
-      // Create a cone and add it to the scene graph.
-      objTransform = new Transform3D();
-      objTransformGroup = new TransformGroup(objTransform);
-      objTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-      sceneTransformGroup.addChild(objTransformGroup);
+        // Add the lights into the scene graph
+        sceneTransformGroup.addChild(ambLight);
+        sceneTransformGroup.addChild(dirLight1);
+        sceneTransformGroup.addChild(dirLight2);
 
-      Material m = new Material(coneColor, eColor, coneColor, sColor, 100.0f);
-      SimpleShaderAppearance a = new SimpleShaderAppearance();
-      m.setLightingEnable(true);
-      a.setMaterial(m);
-      Cone cone = new Cone(0.4f, 1.0f); 
-      cone.setAppearance(a);
-      objTransformGroup.addChild(cone);
+        // Create a cone and add it to the scene graph.
+        objTransform = new Transform3D();
+        objTransformGroup = new TransformGroup(objTransform);
+        objTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        sceneTransformGroup.addChild(objTransformGroup);
 
-      // Create transform groups for each knot point
-      // knot point 0 
-      Transform3D t3dKnot = new Transform3D();
-      t3dKnot.set (pos0);
-      TransformGroup k0TransformGroup = new TransformGroup(t3dKnot);
-      sceneTransformGroup.addChild(k0TransformGroup);
+        Material m = new Material(coneColor, eColor, coneColor, sColor, 100.0f);
+        SimpleShaderAppearance a = new SimpleShaderAppearance();
+        m.setLightingEnable(true);
+        a.setMaterial(m);
+        Cone cone = new Cone(0.4f, 1.0f);
+        cone.setAppearance(a);
+        objTransformGroup.addChild(cone);
 
-      // knot point 1 
-      t3dKnot = new Transform3D();
-      t3dKnot.set (pos1);
-      TransformGroup k1TransformGroup = new TransformGroup(t3dKnot);
-      sceneTransformGroup.addChild(k1TransformGroup);
+        // Create transform groups for each knot point
+        // knot point 0
+        Transform3D t3dKnot = new Transform3D();
+        t3dKnot.set (pos0);
+        TransformGroup k0TransformGroup = new TransformGroup(t3dKnot);
+        sceneTransformGroup.addChild(k0TransformGroup);
 
-      // knot point 2 
-      t3dKnot = new Transform3D();
-      t3dKnot.set (pos2);
-      TransformGroup k2TransformGroup = new TransformGroup(t3dKnot);
-      sceneTransformGroup.addChild(k2TransformGroup);
+        // knot point 1
+        t3dKnot = new Transform3D();
+        t3dKnot.set (pos1);
+        TransformGroup k1TransformGroup = new TransformGroup(t3dKnot);
+        sceneTransformGroup.addChild(k1TransformGroup);
 
-      // knot point 3 
-      t3dKnot = new Transform3D();
-      t3dKnot.set (pos3);
-      TransformGroup k3TransformGroup = new TransformGroup(t3dKnot);
-      sceneTransformGroup.addChild(k3TransformGroup);
+        // knot point 2
+        t3dKnot = new Transform3D();
+        t3dKnot.set (pos2);
+        TransformGroup k2TransformGroup = new TransformGroup(t3dKnot);
+        sceneTransformGroup.addChild(k2TransformGroup);
 
-      // knot point 4 
-      t3dKnot = new Transform3D();
-      t3dKnot.set (pos4);
-      TransformGroup k4TransformGroup = new TransformGroup(t3dKnot);
-      sceneTransformGroup.addChild(k4TransformGroup);
+        // knot point 3
+        t3dKnot = new Transform3D();
+        t3dKnot.set (pos3);
+        TransformGroup k3TransformGroup = new TransformGroup(t3dKnot);
+        sceneTransformGroup.addChild(k3TransformGroup);
 
-      // knot point 5 
-      t3dKnot = new Transform3D();
-      t3dKnot.set (pos5);
-      TransformGroup k5TransformGroup = new TransformGroup(t3dKnot);
-      sceneTransformGroup.addChild(k5TransformGroup);
+        // knot point 4
+        t3dKnot = new Transform3D();
+        t3dKnot.set (pos4);
+        TransformGroup k4TransformGroup = new TransformGroup(t3dKnot);
+        sceneTransformGroup.addChild(k4TransformGroup);
 
-      // Create spheres for each knot point's transform group
-      ColoringAttributes sphereColorAttr = new ColoringAttributes();
-      sphereColorAttr.setColor(sphereColor);
-      SimpleShaderAppearance sphereAppearance = new SimpleShaderAppearance();
-      sphereAppearance.setColoringAttributes(sphereColorAttr);
-      k0TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
-      k1TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
-      k2TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
-      k3TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
-      k4TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
-      k5TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
+        // knot point 5
+        t3dKnot = new Transform3D();
+        t3dKnot.set (pos5);
+        TransformGroup k5TransformGroup = new TransformGroup(t3dKnot);
+        sceneTransformGroup.addChild(k5TransformGroup);
 
-      return root;
+        // Create spheres for each knot point's transform group
+        ColoringAttributes sphereColorAttr = new ColoringAttributes();
+        sphereColorAttr.setColor(sphereColor);
+        SimpleShaderAppearance sphereAppearance = new SimpleShaderAppearance();
+        sphereAppearance.setColoringAttributes(sphereColorAttr);
+        k0TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
+        k1TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
+        k2TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
+        k3TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
+        k4TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
+        k5TransformGroup.addChild(new Sphere(0.10f, sphereAppearance));
+
+        return root;
     }
 
     /*
@@ -434,54 +424,54 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
      * key frame.
      */
     private void setupSplineKeyFrames () {
-      // Prepare spline keyframe data
-      Point3f p   = new Point3f (pos0);            // position
-      float head  = (float)Math.PI/2.0f;           // heading
-      float pitch = 0.0f;                          // pitch 
-      float bank  = 0.0f;                          // bank 
-      Point3f s   = new Point3f(1.0f, 1.0f, 1.0f); // uniform scale
-      splineKeyFrames[0] = 
-         new KBKeyFrame(0.0f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        // Prepare spline keyframe data
+        Point3f p   = new Point3f (pos0);            // position
+        float head  = (float)Math.PI/2.0f;           // heading
+        float pitch = 0.0f;                          // pitch
+        float bank  = 0.0f;                          // bank
+        Point3f s   = new Point3f(1.0f, 1.0f, 1.0f); // uniform scale
+        splineKeyFrames[0] =
+         new KBKeyFrame(0.0f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos1);
-      head  = 0.0f;                               // heading
-      pitch = 0.0f;                               // pitch 
-      bank  = (float)-Math.PI/2.0f;               // bank 
-      s = new Point3f(1.0f, 1.0f, 1.0f);          // uniform scale
-      splineKeyFrames[1] = 
-         new KBKeyFrame(0.2f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos1);
+        head  = 0.0f;                               // heading
+        pitch = 0.0f;                               // pitch
+        bank  = (float)-Math.PI/2.0f;               // bank
+        s = new Point3f(1.0f, 1.0f, 1.0f);          // uniform scale
+        splineKeyFrames[1] =
+         new KBKeyFrame(0.2f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos2);
-      head  = 0.0f;                               // heading
-      pitch = 0.0f;                               // pitch 
-      bank  = 0.0f;                               // bank 
-      s = new Point3f(0.7f, 0.7f, 0.7f);          // uniform scale
-      splineKeyFrames[2] = 
-         new KBKeyFrame(0.4f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos2);
+        head  = 0.0f;                               // heading
+        pitch = 0.0f;                               // pitch
+        bank  = 0.0f;                               // bank
+        s = new Point3f(0.7f, 0.7f, 0.7f);          // uniform scale
+        splineKeyFrames[2] =
+         new KBKeyFrame(0.4f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos3);
-      head  = (float)Math.PI/2.0f;                // heading
-      pitch = 0.0f;                               // pitch 
-      bank  = (float)Math.PI/2.0f;                // bank 
-      s = new Point3f(0.5f, 0.5f, 0.5f);          // uniform scale
-      splineKeyFrames[3] = 
-         new KBKeyFrame(0.6f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos3);
+        head  = (float)Math.PI/2.0f;                // heading
+        pitch = 0.0f;                               // pitch
+        bank  = (float)Math.PI/2.0f;                // bank
+        s = new Point3f(0.5f, 0.5f, 0.5f);          // uniform scale
+        splineKeyFrames[3] =
+         new KBKeyFrame(0.6f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos4);
-      head  = (float)-Math.PI/2.0f;               // heading
-      pitch = (float)-Math.PI/2.0f;               // pitch 
-      bank  = (float)Math.PI/2.0f;                // bank 
-      s = new Point3f(0.4f, 0.4f, 0.4f);          // uniform scale
-      splineKeyFrames[4] = 
-         new KBKeyFrame(0.8f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos4);
+        head  = (float)-Math.PI/2.0f;               // heading
+        pitch = (float)-Math.PI/2.0f;               // pitch
+        bank  = (float)Math.PI/2.0f;                // bank
+        s = new Point3f(0.4f, 0.4f, 0.4f);          // uniform scale
+        splineKeyFrames[4] =
+         new KBKeyFrame(0.8f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos5);
-      head  = 0.0f;                               // heading
-      pitch = 0.0f;                               // pitch 
-      bank  = 0.0f;                               // bank 
-      s = new Point3f(1.0f, 1.0f, 1.0f);          // uniform scale
-      splineKeyFrames[5] = 
-         new KBKeyFrame(1.0f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos5);
+        head  = 0.0f;                               // heading
+        pitch = 0.0f;                               // pitch
+        bank  = 0.0f;                               // bank
+        s = new Point3f(1.0f, 1.0f, 1.0f);          // uniform scale
+        splineKeyFrames[5] =
+         new KBKeyFrame(1.0f, 0, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
     }
 
     /*
@@ -492,34 +482,34 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
      * are Tension, Continuity, and Bias components for each key frame.
      */
     private void setupLinearKeyFrames () {
-      // Prepare linear keyframe data
-      Point3f p = new Point3f (pos0);
-      float head  = 0.0f;                          // heading
-      float pitch = 0.0f;                          // pitch 
-      float bank  = 0.0f;                          // bank 
-      Point3f s = new Point3f(1.0f, 1.0f, 1.0f);   // uniform scale
-      linearKeyFrames[0] = 
-         new KBKeyFrame(0.0f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        // Prepare linear keyframe data
+        Point3f p = new Point3f (pos0);
+        float head  = 0.0f;                          // heading
+        float pitch = 0.0f;                          // pitch
+        float bank  = 0.0f;                          // bank
+        Point3f s = new Point3f(1.0f, 1.0f, 1.0f);   // uniform scale
+        linearKeyFrames[0] =
+         new KBKeyFrame(0.0f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos1);
-      linearKeyFrames[1] = 
-         new KBKeyFrame(0.2f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos1);
+        linearKeyFrames[1] =
+         new KBKeyFrame(0.2f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos2);
-      linearKeyFrames[2] = 
-         new KBKeyFrame(0.4f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos2);
+        linearKeyFrames[2] =
+         new KBKeyFrame(0.4f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos3);
-      linearKeyFrames[3] = 
-         new KBKeyFrame(0.6f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos3);
+        linearKeyFrames[3] =
+         new KBKeyFrame(0.6f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos4);
-      linearKeyFrames[4] = 
-         new KBKeyFrame(0.8f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos4);
+        linearKeyFrames[4] =
+         new KBKeyFrame(0.8f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
 
-      p = new Point3f (pos5);
-      linearKeyFrames[5] = 
-         new KBKeyFrame(1.0f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f); 
+        p = new Point3f (pos5);
+        linearKeyFrames[5] =
+         new KBKeyFrame(1.0f, 1, p, head, pitch, bank, s, 0.0f, 0.0f, 0.0f);
     }
 
 
@@ -527,8 +517,8 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
      * This sets up alpha for the interpolator
      */
     private void setupAnimationData () {
-      yAxis = new Transform3D();
-      animAlpha = new Alpha (-1,Alpha.INCREASING_ENABLE,0,0,duration,0,0,0,0,0);
+        yAxis = new Transform3D();
+        animAlpha = new Alpha (-1,Alpha.INCREASING_ENABLE,0,0,duration,0,0,0,0,0);
     }
 
     /*
@@ -537,22 +527,22 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
      */
     private void createInterpolators () {
 
-      behaviorBranch = new BranchGroup();
+        behaviorBranch = new BranchGroup();
 
-      // create spline interpolator 
-      splineInterpolator =
-         new KBRotPosScaleSplinePathInterpolator(animAlpha, objTransformGroup,
-                                                  yAxis, splineKeyFrames); 
-      splineInterpolator.setSchedulingBounds(bounds);
-      behaviorBranch.addChild(splineInterpolator);
-       
-      // create linear interpolator 
-      linearInterpolator =
-         new KBRotPosScaleSplinePathInterpolator(animAlpha, objTransformGroup,
-                                                  yAxis, linearKeyFrames); 
-      linearInterpolator.setSchedulingBounds(bounds);
-      behaviorBranch.addChild(linearInterpolator);
-      objTransformGroup.addChild(behaviorBranch);
+        // create spline interpolator
+        splineInterpolator =
+                new KBRotPosScaleSplinePathInterpolator(animAlpha, objTransformGroup,
+                                                  yAxis, splineKeyFrames);
+        splineInterpolator.setSchedulingBounds(bounds);
+        behaviorBranch.addChild(splineInterpolator);
+
+        // create linear interpolator
+        linearInterpolator =
+                new KBRotPosScaleSplinePathInterpolator(animAlpha, objTransformGroup,
+                                                  yAxis, linearKeyFrames);
+        linearInterpolator.setSchedulingBounds(bounds);
+        behaviorBranch.addChild(linearInterpolator);
+        objTransformGroup.addChild(behaviorBranch);
 
     }
 
@@ -561,40 +551,40 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
      * linear boolean flag which may be toggled by the user using the choice
      * menu.
      */
-    public void startInterpolator () {
-      if (animationOn) {
-        if (linear) {
-          splineInterpolator.setEnable(false);
-          linearInterpolator.setEnable(true);
-        } else {
-          linearInterpolator.setEnable(false);
-          splineInterpolator.setEnable(true);
+    public void startInterpolator() {
+        if (animationOn) {
+            if (linear) {
+                splineInterpolator.setEnable(false);
+                linearInterpolator.setEnable(true);
+            } else {
+                linearInterpolator.setEnable(false);
+                splineInterpolator.setEnable(true);
+            }
         }
-      }
     }
 
 
     /* 
      * Toggle animation  
      */
-    public void actionPerformed (View view) {
-      if (view == animateButton) {
-        try {
-          // toggle animation
-          if (animationOn) {
-            animationOn = false;
-            splineInterpolator.setEnable(false);
-            linearInterpolator.setEnable(false);
-            animateButton.setText("Start Animation");
-          } else {
-            animationOn = true;
-            startInterpolator();
-            animateButton.setText("Stop Animation");
-          }
-        } catch (Exception e) {
-           System.err.println ("Exception " + e);
+    public void actionPerformed(View view) {
+        if (view == animateButton) {
+            try {
+                // toggle animation
+                if (animationOn) {
+                    animationOn = false;
+                    splineInterpolator.setEnable(false);
+                    linearInterpolator.setEnable(false);
+                    animateButton.setText("Start Animation");
+                } else {
+                    animationOn = true;
+                    startInterpolator();
+                    animateButton.setText("Stop Animation");
+                }
+            } catch (Exception e) {
+                System.err.println("Exception " + e);
+            }
         }
-      }
     }
 
     /*
@@ -602,19 +592,19 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-      if (parent == interpChoice) {
-        try {
-          if (interpChoice.getSelectedItem().equals("Spline")) {
-            linear = false;
-          }
-          if (interpChoice.getSelectedItem().equals("Linear")) {
-            linear = true;
-          }
-          startInterpolator();
-        } catch (Exception e) {
-           System.err.println ("Exception " + e);
+        if (parent == interpChoice) {
+            try {
+                if (interpChoice.getSelectedItem().equals("Spline")) {
+                    linear = false;
+                }
+                if (interpChoice.getSelectedItem().equals("Linear")) {
+                    linear = true;
+                }
+                startInterpolator();
+            } catch (Exception e) {
+                System.err.println("Exception " + e);
+            }
         }
-      }
     }
 
     @Override
@@ -627,11 +617,9 @@ public class SplineAnim extends NewtBaseFragmentActivity implements AdapterView.
      */
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-      int value = picker.getValue();
-      duration = 6000 - (500 * value);
-      animAlpha.setIncreasingAlphaDuration(duration);
+        int value = picker.getValue();
+        duration = 6000 - (500 * value);
+        animAlpha.setIncreasingAlphaDuration(duration);
     }
-
-
 
 }

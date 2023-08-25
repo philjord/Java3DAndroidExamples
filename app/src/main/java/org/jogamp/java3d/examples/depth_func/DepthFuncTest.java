@@ -47,7 +47,6 @@ package org.jogamp.java3d.examples.depth_func;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -58,16 +57,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.jogamp.java3d.RenderingAttributes;
-import org.jogamp.java3d.examples.java3dhelloworld.R;
+import org.jogamp.java3d.examples.java3dexamples.R;
 import org.jogamp.java3d.utils.shader.SimpleShaderAppearance;
-
-import java.io.PrintStream;
 
 import jogamp.newt.driver.android.NewtBaseFragmentActivity;
 
 
 /**
- *The goal of that example is to show the use of different ZBuffer comparison modes.
+ *The goal of this example is to show the use of different ZBuffer comparison modes.
  */
 public class DepthFuncTest extends NewtBaseFragmentActivity {
     
@@ -185,73 +182,40 @@ public class DepthFuncTest extends NewtBaseFragmentActivity {
     {
         String selectedItem = rotatingComboBox.getSelectedItem().toString();  // how to avoid a cast and all that goes with it. (lazyness)
         int mode = RenderingAttributes.ROP_COPY;
-        if ( "CLEAR".equals(selectedItem) )
-        {
+        if ("CLEAR".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_CLEAR;
-        }
-        else if ( "AND".equals(selectedItem) )
-        {
+        } else if ("AND".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_AND;
-        }
-        else if ( "AND_REVERSE".equals(selectedItem) )
-        {
+        } else if ("AND_REVERSE".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_AND_REVERSE;
-        }
-        else if ( "COPY".equals(selectedItem) )
-        {
+        } else if ("COPY".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_COPY;
-        }
-        else if ( "AND_INVERTED".equals(selectedItem) )
-        {
+        } else if ("AND_INVERTED".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_AND_INVERTED;
-        }
-        else if ( "NOOP".equals(selectedItem) )
-        {
+        } else if ("NOOP".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_NOOP;
-        }
-        else if ( "XOR".equals(selectedItem) )
-        {
+        } else if ("XOR".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_XOR;
-        }
-        else if ( "OR".equals(selectedItem) )
-        {
+        } else if ("OR".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_OR;
-        }
-        else if ( "NOR".equals(selectedItem) )
-        {
+        } else if ("NOR".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_NOR;
-        }
-        else if ( "EQUIV".equals(selectedItem) )
-        {
+        } else if ("EQUIV".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_EQUIV;
-        }
-        else if ( "INVERT".equals(selectedItem) )
-        {
+        } else if ("INVERT".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_INVERT;
-        }
-        else if ( "OR_REVERSE".equals(selectedItem) )
-        {
+        } else if ("OR_REVERSE".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_OR_REVERSE;
-        }
-        else if ( "COPY_INVERTED".equals(selectedItem) )
-        {
+        } else if ("COPY_INVERTED".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_COPY_INVERTED;
-        }
-        else if ( "OR_INVERTED".equals(selectedItem) )
-        {
+        } else if ("OR_INVERTED".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_OR_INVERTED;
-        }
-        else if ( "NAND".equals(selectedItem) )
-        {
+        } else if ("NAND".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_NAND;
-        }
-        else if ( "SET".equals(selectedItem) )
-        {
+        } else if ("SET".equals(selectedItem)) {
             mode = RenderingAttributes.ROP_SET;
-        }
-        else
-        {
-            System.out.println("oops. wrong mode in ROP combo: "+selectedItem);
+        } else {
+            System.out.println("oops. wrong mode in ROP combo: " + selectedItem);
         }
         rf.setRotatingObjectROPMode( mode );
     }
@@ -265,57 +229,38 @@ public class DepthFuncTest extends NewtBaseFragmentActivity {
     }
 
     private void shadedComboBoxActionPerformed() {
-        int func = RenderingAttributes.LESS_OR_EQUAL;
         String selectedItem = shadedComboBox.getSelectedItem().toString();  // how to avoid a cast and all that goes with it. (lazyness)
         rf.setStaticObjectTestFunc( getID( selectedItem ) );
     }
 
     private void normalComboBoxActionPerformed() {
-        int func = RenderingAttributes.LESS_OR_EQUAL;
         String selectedItem = normalComboBox.getSelectedItem().toString();  // how to avoid a cast and all that goes with it. (lazyness)
         rf.setStaticWFObjectTestFunc( getID( selectedItem ) );
     }
 
     int getID( String selectedItem ) 
     {
-      int func = RenderingAttributes.LESS_OR_EQUAL;
-      if ( "LESS_OR_EQUAL".equals(selectedItem) )
-      {
-          func = RenderingAttributes.LESS_OR_EQUAL;
-      }
-      else if ( "NEVER".equals(selectedItem) )
-      {
-          func = RenderingAttributes.NEVER;
-      }
-      else if ( "ALWAYS".equals(selectedItem) )
-      {
-          func = RenderingAttributes.ALWAYS;
-      }
-      else if ( "GREATER".equals(selectedItem) )
-      {
-          func = RenderingAttributes.GREATER;
-      }
-      else if ( "GREATER_OR_EQUAL".equals(selectedItem) )
-      {
-          func = RenderingAttributes.GREATER_OR_EQUAL;
-      }
-      else if ( "LESS".equals(selectedItem) )
-      {
-          func = RenderingAttributes.LESS;
-      }
-      else if ( "EQUAL".equals(selectedItem) )
-      {
-          func = RenderingAttributes.EQUAL;
-      }
-      else if ( "NOT_EQUAL".equals(selectedItem) )
-      {
-          func = RenderingAttributes.NOT_EQUAL;
-      }
-      return func;
+        int func = RenderingAttributes.LESS_OR_EQUAL;
+        if ("LESS_OR_EQUAL".equals(selectedItem)) {
+            func = RenderingAttributes.LESS_OR_EQUAL;
+        } else if ("NEVER".equals(selectedItem)) {
+            func = RenderingAttributes.NEVER;
+        } else if ("ALWAYS".equals(selectedItem)) {
+            func = RenderingAttributes.ALWAYS;
+        } else if ("GREATER".equals(selectedItem)) {
+            func = RenderingAttributes.GREATER;
+        } else if ("GREATER_OR_EQUAL".equals(selectedItem)) {
+            func = RenderingAttributes.GREATER_OR_EQUAL;
+        } else if ("LESS".equals(selectedItem)) {
+            func = RenderingAttributes.LESS;
+        } else if ("EQUAL".equals(selectedItem)) {
+            func = RenderingAttributes.EQUAL;
+        } else if ("NOT_EQUAL".equals(selectedItem)) {
+            func = RenderingAttributes.NOT_EQUAL;
+        }
+        return func;
     }
-    
 
-    
     private Spinner normalComboBox;
     private Spinner rotatingComboBox;
     private CheckBox shadedCheckBox;

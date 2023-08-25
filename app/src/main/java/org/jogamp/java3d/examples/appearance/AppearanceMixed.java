@@ -448,11 +448,8 @@ public class AppearanceMixed extends NewtBaseActivity {
 
 
     private Canvas3D createUniverse() {
-        // Get the preferred graphics configuration for the default screen
-        //GraphicsConfiguration config =
-        //    SimpleUniverse.getPreferredConfiguration();
 
-        // Create a MyCanvas3D using the preferred configuration
+        // Create a MyCanvas3D
         MyCanvas3D c = new MyCanvas3D();
 
         // Create simple universe with view branch
@@ -482,7 +479,6 @@ public class AppearanceMixed extends NewtBaseActivity {
 
         SimpleShaderAppearance.setVersionES300();
 
-
         if (bgImage == null) {
             // the path to the image for an applet
             bgImage = getClass().getResource("/resources/images/bg.jpg");
@@ -500,8 +496,6 @@ public class AppearanceMixed extends NewtBaseActivity {
                 System.exit(1);
             }
         }
-
-
 
         // Create Canvas3D and SimpleUniverse; add canvas to drawing panel
         c = createUniverse();
@@ -552,6 +546,5 @@ public class AppearanceMixed extends NewtBaseActivity {
             e.printStackTrace();
         }
     }
-
 
 }
