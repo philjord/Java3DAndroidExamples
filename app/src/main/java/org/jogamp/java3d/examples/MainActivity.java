@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
                 // send the which through and hope they match up
-                String selectedItem = parent.getItemAtPosition(which).toString();  // how to avoid a cast and all that goes with it. (lazyness)
+                String selectedItem = parent.getItemAtPosition(which).toString();  // how to avoid a case and all that goes with it. (lazyness)
                 if ("AlternateAppearanceBoundsTest".equals(selectedItem)) {
                     Intent intent = new Intent(MainActivity.this, AlternateAppearanceBoundsTest.class);
                     startActivity(intent);

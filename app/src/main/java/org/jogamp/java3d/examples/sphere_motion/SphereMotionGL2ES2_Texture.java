@@ -30,6 +30,7 @@
 package org.jogamp.java3d.examples.sphere_motion;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import java.io.IOException;
 
@@ -380,4 +381,12 @@ public class SphereMotionGL2ES2_Texture extends NewtBaseActivity {
 		}
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }

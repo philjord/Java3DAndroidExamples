@@ -47,6 +47,7 @@ package org.jogamp.java3d.examples.depth_func;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -177,7 +178,15 @@ public class DepthFuncTest extends NewtBaseFragmentActivity {
         });
     }
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    
     private void rotatingComboBoxActionPerformed()
     {
         String selectedItem = rotatingComboBox.getSelectedItem().toString();  // how to avoid a cast and all that goes with it. (lazyness)

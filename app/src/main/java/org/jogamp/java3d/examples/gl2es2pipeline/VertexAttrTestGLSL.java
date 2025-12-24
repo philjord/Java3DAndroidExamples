@@ -30,6 +30,7 @@
 package org.jogamp.java3d.examples.gl2es2pipeline;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -213,6 +214,15 @@ public class VertexAttrTestGLSL extends NewtBaseFragmentActivity {
 			//ignore as we are done
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	static class MyShape extends Shape3D

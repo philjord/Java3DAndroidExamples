@@ -30,6 +30,7 @@
 package org.jogamp.java3d.examples.background;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import org.jogamp.java3d.Background;
 import org.jogamp.java3d.BoundingSphere;
@@ -259,4 +260,12 @@ public class BackgroundTexture extends NewtBaseFragmentActivity {
 		}
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }

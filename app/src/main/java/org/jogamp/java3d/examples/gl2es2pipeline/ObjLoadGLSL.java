@@ -30,6 +30,7 @@
 package org.jogamp.java3d.examples.gl2es2pipeline;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
@@ -412,4 +413,12 @@ public class ObjLoadGLSL extends NewtBaseActivity {
 		}
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }

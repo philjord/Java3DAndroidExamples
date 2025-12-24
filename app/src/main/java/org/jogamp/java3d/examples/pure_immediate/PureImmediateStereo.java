@@ -45,6 +45,7 @@
 package org.jogamp.java3d.examples.pure_immediate;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import java.util.Map;
 
@@ -310,6 +311,15 @@ public class PureImmediateStereo extends NewtBaseActivity implements Runnable {
 			//ignore as we are done
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
     
 }

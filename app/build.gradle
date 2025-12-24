@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'org.jogamp.java3d.examples.java3dexamples'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "org.jogamp.java3d.examples.java3dexamples"
         minSdk 21
-        targetSdk 33
+        targetSdk 35
         versionCode 1
         versionName "1.0"
     }
@@ -30,12 +30,12 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     //Add these 2 libraries for Java3D
     implementation ('org.jogamp.java3d:java3d-core-and:1.7.2')
     implementation ('org.jogamp.java3d:java3d-utils-and:1.7.2')
+    implementation ('org.jogamp.joal:joal-android:2.6.0')// just for the joal 3d sound, which is currently broken in 2.6.0
 
     //images and shaders etc
     implementation files('libs/resources.jar')

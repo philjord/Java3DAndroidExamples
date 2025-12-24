@@ -1,6 +1,7 @@
 package org.jogamp.java3d.examples.gl2es2pipeline;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import org.jogamp.java3d.Alpha;
@@ -125,6 +126,15 @@ public class SamplerTestGLSL extends NewtBaseActivity {
             //ignore as we are done
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private static String cloudTexName = "/resources/images/bg.jpg";

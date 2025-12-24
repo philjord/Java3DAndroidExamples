@@ -45,6 +45,7 @@
 package org.jogamp.java3d.examples.alternate_appearance;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -222,6 +223,16 @@ public class AlternateAppearanceScopeTest extends NewtBaseFragmentActivity {
         fragmentTransaction.add(R.id.java3dSpace, nbf);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     // create a NewtBaseFragment Fragment and put it into the frame layout waiting for it
     public static class NewtBaseFragment2 extends NewtBaseFragment
     {

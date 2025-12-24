@@ -46,6 +46,7 @@ package org.jogamp.java3d.examples.fps_counter;
 
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.jogamp.opengl.GLAutoDrawable;
@@ -236,7 +237,16 @@ public class FPSCounterDemo extends NewtBaseActivity {
 			e.printStackTrace();
 		}
 	}
-    
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
     /** Parses the commandline for the various switches to set the FPSCounter
      * variables.
      * All arguments are of the form <i>-name value</i>.

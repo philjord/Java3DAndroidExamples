@@ -45,6 +45,7 @@
 package org.jogamp.java3d.examples.pure_immediate;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import org.jogamp.java3d.Alpha;
 import org.jogamp.java3d.BranchGroup;
@@ -186,5 +187,12 @@ public class PureImmediate extends NewtBaseActivity implements Runnable {
         }
     }
 
-    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

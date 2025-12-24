@@ -45,6 +45,7 @@
 package org.jogamp.java3d.examples.raster;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import javaawt.image.BufferedImage;
 import javaawt.image.VMBufferedImage;
@@ -200,6 +201,15 @@ public class ReadRaster extends NewtBaseActivity {
 			//ignore as we are done
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	class myCanvas3D extends Canvas3D

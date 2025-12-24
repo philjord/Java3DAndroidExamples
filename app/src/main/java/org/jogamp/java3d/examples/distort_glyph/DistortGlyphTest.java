@@ -46,6 +46,7 @@ package org.jogamp.java3d.examples.distort_glyph;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import javaawt.Font;
 import javaawt.VMFont;
@@ -257,5 +258,13 @@ public class DistortGlyphTest extends NewtBaseActivity {
             e.printStackTrace();
         }
     }
-    
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

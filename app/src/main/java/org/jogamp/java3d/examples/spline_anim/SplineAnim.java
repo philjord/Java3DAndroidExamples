@@ -45,7 +45,9 @@
 package org.jogamp.java3d.examples.spline_anim;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -207,6 +209,14 @@ public class SplineAnim extends NewtBaseFragmentActivity
         fragmentTransaction.commit();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     // create a NewtBaseFragment Fragment and put it into the frame layout waiting for it
     public static class NewtBaseFragment2 extends NewtBaseFragment

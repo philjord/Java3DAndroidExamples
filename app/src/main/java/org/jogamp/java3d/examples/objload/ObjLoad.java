@@ -45,6 +45,7 @@
 package org.jogamp.java3d.examples.objload;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
@@ -335,5 +336,14 @@ public class ObjLoad extends NewtBaseActivity {
             //ignore as we are done
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

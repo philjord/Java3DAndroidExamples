@@ -30,6 +30,7 @@
 package org.jogamp.java3d.examples.raster;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import java.net.URL;
 
@@ -209,6 +210,15 @@ public class RasterTest extends NewtBaseActivity {
 			//ignore as we are done
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 }

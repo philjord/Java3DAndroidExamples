@@ -45,6 +45,7 @@
 package org.jogamp.java3d.examples.lod;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import org.jogamp.java3d.AmbientLight;
 import org.jogamp.java3d.Behavior;
@@ -269,6 +270,15 @@ public class LOD extends NewtBaseActivity {
             //ignore as we are done
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
     
 }

@@ -45,6 +45,7 @@
 package org.jogamp.java3d.examples.platform_geometry;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import org.jogamp.java3d.Alpha;
 import org.jogamp.java3d.BoundingSphere;
@@ -237,5 +238,14 @@ public class SimpleGeometry extends NewtBaseActivity {
             //ignore as we are done
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
