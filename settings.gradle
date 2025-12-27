@@ -10,10 +10,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-
-        //Add these 2 maven sources for Java3D, until Java3D is published on maven central
-        maven { url "https://jogamp.org/deployment/maven" }
-        maven { url "https://jogamp.org/deployment/maven-java3d" }
     }
 }
 rootProject.name = "Java3DAndroidExamples"
